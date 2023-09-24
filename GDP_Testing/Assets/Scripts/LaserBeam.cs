@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ public class LaserBeam
     private GameObject laserObject;
     private LineRenderer laser;
     private List<Vector3> laserVertices = new List<Vector3>();
+
+    private GameObject newSource;
 
     public LaserBeam(Vector3 pos, Vector3 dir, Material mat)
     {
@@ -66,6 +67,18 @@ public class LaserBeam
             
             castRay(pos, dir, laser);
         }
+        else if (hitInfo.collider.gameObject.CompareTag("Transparent"))
+        {
+            Debug.Log("HIT TRANSPARENT");
+
+            newSource = new GameObject("Second");
+            newSource.transform.position = hitInfo.point;
+            newSource.transform.right = direction;
+            newSource.AddComponent<shootLaser>();
+            
+            Object.Destroy(newSource);
+
+        }
         else
         {
             laserVertices.Add(hitInfo.point);
@@ -73,3 +86,4 @@ public class LaserBeam
         }
     }
 }
+

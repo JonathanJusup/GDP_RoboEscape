@@ -1,0 +1,105 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Laser : MonoBehaviour
+{
+    public bool isDeadly;
+    private Vector3 pos, dir;
+    private Material mat;
+    private LineRenderer lineRenderer;
+
+    private Color greenColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+    private Color redColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+
+    public void InitLaser(Vector3 position, Vector3 direction, Material material, bool isDeadly)
+    {
+        this.pos = position;
+        this.dir = direction;
+        this.mat = material;
+        this.isDeadly = isDeadly;
+
+        InitLineRenderer();
+    }
+
+    private void InitLineRenderer()
+    {
+        lineRenderer = this.AddComponent<LineRenderer>();
+        lineRenderer.material = mat;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+        lineRenderer.SetPosition(0, pos);
+
+        if (isDeadly)
+        {
+            lineRenderer.material.color = redColor;
+            lineRenderer.startColor = redColor;
+            lineRenderer.endColor = redColor;
+        }
+        else
+        {
+            lineRenderer.material.color = greenColor;
+            lineRenderer.startColor = greenColor;
+            lineRenderer.endColor = greenColor;
+        }
+
+        
+
+        
+        Ray ray = new Ray(pos, dir);
+        RaycastHit hit;
+        
+        Debug.Log(dir);
+
+        if (Physics.Raycast(ray, out hit, 30, 1))
+        {
+            ProcessHit(hit);
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, ray.GetPoint(30));
+        }
+    }
+
+    private void ProcessHit(RaycastHit hit)
+    {
+        lineRenderer.SetPosition(1, hit.point);
+        
+        //Create Child Laser depending on what is hit        
+        if (hit.collider.gameObject.CompareTag("Mirror"))
+        {
+            Debug.Log("REFLECTION CHILD");
+            LaserReflection(hit);
+            
+        }
+        else if (hit.collider.gameObject.CompareTag("Transparent"))
+        {
+            Debug.Log("TRANSMISSION CHILD");
+            LaserTransmission(hit, true);
+        }
+    }
+
+    private void LaserReflection(RaycastHit hit)
+    {
+        GameObject reflection = new GameObject("Reflection");
+        reflection.transform.parent = transform;
+        reflection.transform.position = hit.point;
+        reflection.transform.right = Vector3.Reflect(dir, hit.normal);
+
+        Laser reflectionLaserComponent = reflection.AddComponent<Laser>();
+        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, mat, isDeadly);
+    }
+
+    private void LaserTransmission(RaycastHit hit, bool isDeadly)
+    {
+        GameObject reflection = new GameObject("Transmission");
+        reflection.transform.parent = transform;
+        reflection.transform.position = hit.point + dir * 0.1f;
+        reflection.transform.right = dir;
+
+        Laser reflectionLaserComponent = reflection.AddComponent<Laser>();
+        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, mat, isDeadly);
+    }
+}
