@@ -7,9 +7,28 @@ using UnityEngine.Serialization;
 
 public class PressurePlate : MonoBehaviour
 {
-    public GameObject toggleableObject;
-    private bool m_IsPressed;
+    //public GameObject toggleableObject;
+    [SerializeField] private bool m_IsPressed;
 
+    public bool isPressed => m_IsPressed;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!m_IsPressed)
+        {
+            m_IsPressed = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (m_IsPressed)
+        {
+            m_IsPressed = false;
+        }
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         //TODO: Add additional trigger conditions eg. Only player, boxes can trigger
@@ -48,4 +67,5 @@ public class PressurePlate : MonoBehaviour
 
         toggleComponent.Toggle(state);
     }
+    */
 }

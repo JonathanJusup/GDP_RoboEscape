@@ -51,8 +51,6 @@ public class Laser : MonoBehaviour
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         
-        Debug.Log(dir);
-
         if (Physics.Raycast(ray, out hit, 30, 1))
         {
             ProcessHit(hit);
@@ -70,13 +68,11 @@ public class Laser : MonoBehaviour
         //Create Child Laser depending on what is hit        
         if (hit.collider.gameObject.CompareTag("Mirror"))
         {
-            Debug.Log("REFLECTION CHILD");
             LaserReflection(hit);
             
         }
         else if (hit.collider.gameObject.CompareTag("Transparent"))
         {
-            Debug.Log("TRANSMISSION CHILD");
             LaserTransmission(hit, true);
         }
     }
