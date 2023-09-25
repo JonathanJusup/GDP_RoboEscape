@@ -152,9 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftRotationTrigger: {fileID: 0}
   rightRotationTrigger: {fileID: 0}
-  rotationSpeed: 0.1
-  upperBound: 90
+  rotationSpeed: 0.05
   lowerBound: -90
+  upperBound: 90
 --- !u!1 &8714129467538117452
 GameObject:
   m_ObjectHideFlags: 0
