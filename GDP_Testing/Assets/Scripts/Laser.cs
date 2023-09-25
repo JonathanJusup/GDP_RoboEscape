@@ -75,6 +75,13 @@ public class Laser : MonoBehaviour
         {
             LaserTransmission(hit, true);
         }
+        else if (hit.collider.gameObject.CompareTag("Player"))
+        {
+            /*
+            PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+            playerController.die();
+            */
+        }
     }
 
     private void LaserReflection(RaycastHit hit)

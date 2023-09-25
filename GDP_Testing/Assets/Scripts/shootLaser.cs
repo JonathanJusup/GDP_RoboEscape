@@ -23,9 +23,9 @@ public class shootLaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Destroy(GameObject.Find("FirstLaser"));
+        Destroy(GameObject.Find(this.name + "LaserBeam"));
 
-        firstLaser = new GameObject("FirstLaser");
+        firstLaser = new GameObject(this.name + "LaserBeam");
         Laser laserComponent = firstLaser.AddComponent<Laser>();
         laserComponent.InitLaser(transform.position, transform.right, material, false);
         
