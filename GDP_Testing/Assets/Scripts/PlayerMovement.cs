@@ -9,10 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement;
     private Rigidbody rb;
 
+    private BoxCollider bottomCollider;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        bottomCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
