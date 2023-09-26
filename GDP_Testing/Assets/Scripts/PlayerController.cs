@@ -36,26 +36,21 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isOnGround = true;
-        }
-    }
-
-    public void die(bool isDeadly)
+    public void Die()
     {
         // TODO add death sound, preferably lego 
        GameObject player = GameObject.Find("Player");
-       if (isDeadly)
-       {
-           player.SetActive(false);
-           Vector3 playerPos = transform.position;
-           CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
-           cubeSpawner.SpawnCubes(playerPos);
-
-       }
        
+       player.SetActive(false);
+       Vector3 playerPos = transform.position;
+       CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
+       cubeSpawner.SpawnCubes(playerPos);
+
+       
+    }
+
+    public void SetIsGrounded(bool isGround)
+    {
+        isOnGround = isGround;
     }
 }

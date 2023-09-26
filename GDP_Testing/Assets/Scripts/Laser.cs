@@ -75,11 +75,11 @@ public class Laser : MonoBehaviour
         {
             LaserTransmission(hit, true);
         }
-        else if (hit.collider.gameObject.CompareTag("Player"))
+        else if (hit.collider.gameObject.CompareTag("Player") && this.isDeadly)
         {
             
             PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-            playerController.die(this.isDeadly);
+            playerController.Die();
             
         }
         else if (hit.collider.gameObject.CompareTag("Meltable"))
