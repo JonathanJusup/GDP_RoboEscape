@@ -1,14 +1,15 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
     public float jumpPower = 5.0f;
     public bool isOnGround = true;
     private float horizontalMovement;
     private Rigidbody rb;
-
+    public bool dies;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,5 +41,15 @@ public class PlayerMovement : MonoBehaviour
         {
             isOnGround = true;
         }
+    }
+
+    public void die(bool isDeadly)
+    {
+       GameObject player = GameObject.Find("Player");
+       if (isDeadly)
+       {
+           player.SetActive(false);    
+       }
+       
     }
 }
