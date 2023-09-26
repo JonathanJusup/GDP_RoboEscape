@@ -69,11 +69,18 @@ public class Laser : MonoBehaviour
         if (hit.collider.gameObject.CompareTag("Mirror"))
         {
             LaserReflection(hit);
-            
+        }
+        else if (hit.collider.gameObject.CompareTag("Transparent_Red"))
+        {
+            LaserTransmission(hit, true);
+        }
+        else if (hit.collider.gameObject.CompareTag("Transparent_Green"))
+        {
+            LaserTransmission(hit, false);
         }
         else if (hit.collider.gameObject.CompareTag("Transparent"))
         {
-            LaserTransmission(hit, true);
+            LaserTransmission(hit, isDeadly);
         }
         else if (hit.collider.gameObject.CompareTag("Player") && this.isDeadly)
         {
@@ -103,7 +110,7 @@ public class Laser : MonoBehaviour
     {
         GameObject reflection = new GameObject("Transmission");
         reflection.transform.parent = transform;
-        reflection.transform.position = hit.point + dir * 0.1f;
+        reflection.transform.position = hit.point + dir * 0.01f;
         reflection.transform.right = dir;
 
         Laser reflectionLaserComponent = reflection.AddComponent<Laser>();

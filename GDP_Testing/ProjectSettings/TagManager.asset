@@ -8,6 +8,8 @@ TagManager:
   - Transparent
   - Ground
   - Meltable
+  - Transparent_Red
+  - Transparent_Green
   layers:
   - Default
   - TransparentFX
