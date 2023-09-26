@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalMovement);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,10 +46,15 @@ public class PlayerController : MonoBehaviour
 
     public void die(bool isDeadly)
     {
+        // TODO add death sound, preferably lego 
        GameObject player = GameObject.Find("Player");
        if (isDeadly)
        {
-           player.SetActive(false);    
+           player.SetActive(false);
+           Vector3 playerPos = transform.position;
+           CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
+           cubeSpawner.SpawnCubes(playerPos);
+
        }
        
     }
