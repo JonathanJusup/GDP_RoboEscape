@@ -1,21 +1,19 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
     public float jumpPower = 5.0f;
     public bool isOnGround = true;
     private float horizontalMovement;
     private Rigidbody rb;
-
-    private BoxCollider bottomCollider;
-
+    public bool dies;
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        bottomCollider = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -35,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalMovement);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,5 +42,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isOnGround = true;
         }
+    }
+
+    public void die(bool isDeadly)
+    {
+        // TODO add death sound, preferably lego 
+       GameObject player = GameObject.Find("Player");
+       if (isDeadly)
+       {
+           player.SetActive(false);
+           Vector3 playerPos = transform.position;
+           CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
+           cubeSpawner.SpawnCubes(playerPos);
+
+       }
+       
     }
 }
