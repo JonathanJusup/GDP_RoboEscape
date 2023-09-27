@@ -51,13 +51,13 @@ public class Laser : MonoBehaviour
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         
-        if (Physics.Raycast(ray, out hit, 30, 1))
+        if (Physics.Raycast(ray, out hit, 100, 1))
         {
             ProcessHit(hit);
         }
         else
         {
-            lineRenderer.SetPosition(1, ray.GetPoint(30));
+            lineRenderer.SetPosition(1, ray.GetPoint(100));
         }
     }
 
