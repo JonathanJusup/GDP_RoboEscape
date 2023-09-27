@@ -89,9 +89,10 @@ public class Laser : MonoBehaviour
             playerController.Die();
             
         }
-        else if (hit.collider.gameObject.CompareTag("Meltable"))
+        else if (hit.collider.gameObject.CompareTag("Meltable") && this.isDeadly)
         {
             MeltingController meltingController = GameObject.Find("MeltingBlock").GetComponent<MeltingController>();
+            meltingController.StartMelting();
         }
     }
 

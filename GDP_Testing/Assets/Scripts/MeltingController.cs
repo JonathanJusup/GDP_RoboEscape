@@ -2,46 +2,51 @@ using UnityEngine;
 
 public class MeltingController : MonoBehaviour
 {
-    
-    private bool isColliding = false;
+    public float meltingDuration = 15.0f; // Zeitraum, über den das Schmelzen erfolgt
+    private Vector3 initialScale;
+    private bool isMelting = false;
     public Material targetMaterial;
+    private float meltingTimer = 0f;
+
+
+
 
     private void Start()
     {
+        initialScale = transform.localScale;
+        targetMaterial.DisableKeyword("_EMISSION");
+        
     }
 
     private void Update()
     {
-        if (isColliding)
+        if (isMelting)
         {
-            Vector3 scale = transform.localScale;
-            // Hier ändern wir die Skalierung des Blocks
-            Vector3 newScale = new Vector3(scale.x, scale.y * 0.5f, scale.z);
+            // Berechne den Schmelzfortschritt (0 bis 1)
+            meltingTimer += Time.deltaTime;
+            float meltProgress = Mathf.Clamp01(meltingTimer / meltingDuration);
+            
+            // Interpoliere die Skalierung, um den Schmelzeffekt zu erzeugen
+            Vector3 newScale = Vector3.Lerp(initialScale, Vector3.zero, meltProgress);
             transform.localScale = newScale;
+            if (meltProgress == 1.0f)
+            {
+                Debug.Log("STOP MELTING");
+                isMelting = !isMelting;
+                GameObject block = GameObject.Find("MeltingBlock");
+                block.SetActive(false);
+                
+            }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    
+    // Methode, um den Schmelzvorgang zu starten
+    public void StartMelting()
     {
-        // Überprüfe, ob die Kollision mit dem gewünschten Objekt stattgefunden hat
-        if (collision.gameObject.CompareTag("Meltable"))
-        {
-            Debug.Log("MELTING");
-            isColliding = true;
-            targetMaterial.EnableKeyword("_EMISSION");
-            targetMaterial.SetColor("_EmissionColor", Color.red);
-            targetMaterial.SetFloat("_EmissionScaleUI", 2.0f);
-
-        }
+        targetMaterial.EnableKeyword("_EMISSION");
+        targetMaterial.SetColor("_EmissionColor", Color.red);
+        targetMaterial.SetFloat("_EmissionScaleUI", 2.0f); 
+        isMelting = true;
     }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        // Überprüfe, ob die Kollision mit dem gewünschten Objekt beendet wurde
-        if (collision.gameObject.CompareTag("Meltable"))
-        {
-            isColliding = false;
-            targetMaterial.DisableKeyword("_Emission");
-        }
-    }
+    
 }
