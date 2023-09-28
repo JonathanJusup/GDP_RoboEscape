@@ -36,6 +36,15 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalMovement);
         
     }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        { 
+            Die();
+        }
+    }
+    
 
     public void Die()
     {
