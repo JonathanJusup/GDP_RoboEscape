@@ -19,17 +19,17 @@
 - Level 2
 
 # Sam / Flo / Nghia
-- Player Death
-	- Player Model invisible
-	- 20 Cubes + Random Force (Scrap Parts)
+- Player Death [DONE]
+	- Player Model invisible [DONE]
+	- 20 Cubes + Random Force (Scrap Parts) [DONE]
 - Death Screen
 	- Gray Overlay
 	- "Press R to restart"
-- Melting Blocks
-	- Downsizing (Animation)
-	- only melts when Laser (isDeadly == true)
-- Sentry Turret
-	- LookAt & ShootAt Player
+- Melting Blocks [DONE]
+	- Downsizing (Animation) [DONE]
+	- only melts when Laser (isDeadly == true) [DONE]
+- Sentry Turret [DONE]
+	- LookAt & ShootAt Player [DONE]
 - CharacterController
 	- testing & fixing
 
