@@ -10,6 +10,7 @@ TagManager:
   - Meltable
   - Transparent_Red
   - Transparent_Green
+  - Bullet
   layers:
   - Default
   - TransparentFX
