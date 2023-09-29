@@ -5,7 +5,7 @@ public class Connector : MonoBehaviour
 {
     [SerializeField] private Transform fromGameObject;
     [SerializeField] private Transform toGameObject;
-
+    
     //[SerializeField] private Material activatedMaterial;
     //[SerializeField] private Material deactivatedMaterial;
     

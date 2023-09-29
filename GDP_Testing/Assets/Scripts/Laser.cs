@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    //TODO: Future optimization -> Laser Pool
+    
     public bool isDeadly;
     private Vector3 pos, dir;
     private Material mat;
@@ -84,15 +86,26 @@ public class Laser : MonoBehaviour
         }
         else if (hit.collider.gameObject.CompareTag("Player") && this.isDeadly)
         {
-            
-            PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
+            PlayerController playerController = hit.collider.gameObject.GetComponent<PlayerController>();
             playerController.Die();
-            
+        }
+        else if (hit.collider.gameObject.CompareTag("PlayerProp") && this.isDeadly)
+        {
+            PlayerPropController propController = hit.collider.gameObject.GetComponent<PlayerPropController>();
+            propController.DieAfterDelay();
         }
         else if (hit.collider.gameObject.CompareTag("Meltable") && this.isDeadly)
         {
-            MeltingController meltingController = GameObject.Find("MeltingBlock").GetComponent<MeltingController>();
+            MeltingController meltingController = hit.collider.gameObject.GetComponent<MeltingController>();
             meltingController.StartMelting();
+        } else if (hit.collider.gameObject.CompareTag("Switch"))
+        {
+            SwitchController switchController = hit.collider.gameObject.GetComponent<SwitchController>();
+            if ((switchController.receiveDeadlyLaser && isDeadly) || (!switchController.receiveDeadlyLaser && !isDeadly))
+            {
+                switchController.ActivateSwitch();
+            }
         }
     }
 

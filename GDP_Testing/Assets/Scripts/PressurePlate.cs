@@ -12,7 +12,7 @@ public class PressurePlate : MonoBehaviour
 
     public bool isPressed => m_IsPressed;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (!m_IsPressed)
         {

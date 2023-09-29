@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        // TODO add death sound, preferably lego 
-       GameObject player = GameObject.Find("Player");
+        // TODO add death sound, preferably lego
+        //TODO: No need to "find" player, its already the gameObject itself
+        GameObject player = GameObject.Find("Player");
        
        player.SetActive(false);
        Vector3 playerPos = transform.position;

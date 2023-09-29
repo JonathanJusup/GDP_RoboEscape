@@ -5,7 +5,7 @@ public class MeltingController : MonoBehaviour
     public float meltingDuration = 15.0f; // Zeitraum, über den das Schmelzen erfolgt
     private Vector3 initialScale;
     private bool isMelting = false;
-    public Material targetMaterial;
+    private Material m_Material;
     private float meltingTimer = 0f;
 
 
@@ -14,8 +14,8 @@ public class MeltingController : MonoBehaviour
     private void Start()
     {
         initialScale = transform.localScale;
-        targetMaterial.DisableKeyword("_EMISSION");
-        
+        m_Material = this.gameObject.GetComponent<Renderer>().material;
+        m_Material.DisableKeyword("_EMISSION");
     }
 
     private void Update()
@@ -43,9 +43,9 @@ public class MeltingController : MonoBehaviour
     // Methode, um den Schmelzvorgang zu starten
     public void StartMelting()
     {
-        targetMaterial.EnableKeyword("_EMISSION");
-        targetMaterial.SetColor("_EmissionColor", Color.red);
-        targetMaterial.SetFloat("_EmissionScaleUI", 2.0f); 
+        m_Material.EnableKeyword("_EMISSION");
+        m_Material.SetColor("_EmissionColor", Color.red);
+        m_Material.SetFloat("_EmissionScaleUI", 2.0f); 
         isMelting = true;
     }
     

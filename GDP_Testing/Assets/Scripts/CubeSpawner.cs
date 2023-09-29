@@ -7,22 +7,9 @@ public class CubeSpawner : MonoBehaviour
     public GameObject cube;
     public int numberOfCubes = 10;
     [SerializeField] private float force = 1.0f;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SpawnCubes(Vector3 pos)
     {
-        // TODO Kraft verringern
         for (int i = 0; i < numberOfCubes; i++)
         {
             GameObject cube = Instantiate(this.cube, pos, Quaternion.identity);

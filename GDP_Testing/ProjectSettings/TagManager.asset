@@ -11,6 +11,8 @@ TagManager:
   - Transparent_Red
   - Transparent_Green
   - Bullet
+  - Switch
+  - PlayerProp
   layers:
   - Default
   - TransparentFX

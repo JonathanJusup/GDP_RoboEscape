@@ -6,6 +6,7 @@ public class ExitLevel : MonoBehaviour
 {
     [SerializeField] private Animator transitionAnim;
     [SerializeField] private float transitionTime = 1f;
+    [SerializeField] private int levelIdx = 0;
     private Door doorScript;
     
     private void OnTriggerEnter(Collider other)
@@ -21,8 +22,7 @@ public class ExitLevel : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        // TODO ES MUSS EIGENTLICH +1 GERECHNET WERDEN, ÄNDERN, SOBALD TÜR AUCH IM INTRO IST
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
+        StartCoroutine(LoadLevel(levelIdx));
     }
 
     IEnumerator LoadLevel(int index)

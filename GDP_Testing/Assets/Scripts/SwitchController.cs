@@ -1,17 +1,24 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchController : MonoBehaviour
 {
-    private bool m_IsActive;
+    [SerializeField] private bool m_IsActive;
     [SerializeField] private float initTimer = 1.0f;
     private float m_CurrentTimer;
-    
-    //[SerializableField] private Door door;
+    [SerializeField] private Door door;
+
+    public bool receiveDeadlyLaser;
+    [SerializeField] private Material greenMaterial;
+    [SerializeField] private Material redMaterial;
 
     // Start is called before the first frame update
     void Start()
     {
         m_CurrentTimer = initTimer;
+        
+        //TODO: Fix this somehow
+        this.GetComponentInChildren<Renderer>().materials[1] = receiveDeadlyLaser ? redMaterial : greenMaterial;
     }
 
     // Update is called once per frame
@@ -24,12 +31,16 @@ public class SwitchController : MonoBehaviour
             {
                 m_IsActive = false;
             }
-            
-            //door.open();
+            else
+            {
+                door.Open();
+            }
+
         }
         else
         {
-            //door.close();
+            m_CurrentTimer = initTimer;
+            door.Close();
         }
     }
 
