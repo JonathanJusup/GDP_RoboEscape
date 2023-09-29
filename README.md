@@ -1,42 +1,25 @@
 # GDP_RoboEscape
 
 # Jonathan
-- Intro Level (0)
-	- Camera LookAt Player
-	- Spawn Scrap Robots + WASD Keys
-		-Despawn + Respawn
-	- Conveyor Belt + Force to right
-	- Rotating Chainblades
-- Level 1
-	- better design
-	- testing + fixing
-- Level 2
-	- Laser Script beenden
-	- different transmission colors
+- Design Level 2
+- Design Sandbox Level
 - (optional) Laser Particle Effect
+- (optional) AI speech bubblez
 - Model more objects
-- Level Design
-- Level 2
 
 # Sam / Flo / Nghia
-- Player Death [DONE]
-	- Player Model invisible [DONE]
-	- 20 Cubes + Random Force (Scrap Parts) [DONE]
+- Implement Reset functionality
 - Death Screen
 	- Gray Overlay
 	- "Press R to restart"
-- Melting Blocks [DONE]
-	- Downsizing (Animation) [DONE]
-	- only melts when Laser (isDeadly == true) [DONE]
-- Sentry Turret [DONE]
-	- LookAt & ShootAt Player [DONE]
-- CharacterController
-	- testing & fixing
+- (optional) Sentry Turret
+	- LookAt & ShootAt Player
+- 2D Character Controller *new*
 
-## Ideal PoC
-- Sandbox
-- Intro
-- Level 1
-- Level 2
-- (optional) Level 3
+## Error Fixing
+- Fix Door Animation (only move on y-axis)
+- Fix CircularSaw Animation (Clockwise + CounterClockwise)
+
+
+
 
