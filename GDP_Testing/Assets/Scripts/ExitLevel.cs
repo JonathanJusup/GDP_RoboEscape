@@ -13,11 +13,7 @@ public class ExitLevel : MonoBehaviour
     {
         // TODO Debug entfernen, sobald man sicher ist, dass alles läuft wie es soll
         Debug.Log("VERLASSE LEVEL");
-        doorScript = GameObject.Find("Door").GetComponent<Door>();
-        if (other.gameObject.CompareTag("Player") && doorScript.GetIsOpen())
-        {
-            LoadNextLevel();
-        }
+        LoadNextLevel();
     }
 
     private void LoadNextLevel()

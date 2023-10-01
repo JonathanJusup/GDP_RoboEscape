@@ -25,17 +25,19 @@ public class MirrorController : MonoBehaviour
     private Quaternion m_InitialRotation;
     private float m_CurrentRotation = 0.0f;
 
-    
+    [SerializeField] private bool moveOnXAxis = true;
+
+
 
     private void Start()
     {
         m_InitialRotation = body.rotation;
         m_OffsetLowerBound = lowerRotationBound - body.transform.eulerAngles.z;
         m_OffsetUpperBound = upperRotationBound - body.transform.eulerAngles.z;
-
-        float initPositionX = transform.position.x;
-        lowerXBound += initPositionX;
-        upperXBound += initPositionX;
+        
+        Vector3 initPosition = transform.position;
+        lowerXBound += moveOnXAxis ? initPosition.x : initPosition.y;
+        upperXBound += moveOnXAxis ? initPosition.x : initPosition.y;
     }
 
     // Update is called once per frame
@@ -43,10 +45,31 @@ public class MirrorController : MonoBehaviour
     {
         CalcMirrorRotation();
 
-        float offsetX = Mathf.Lerp(lowerXBound, upperXBound,
-            (m_CurrentRotation - lowerRotationBound) / (upperRotationBound - lowerRotationBound));
+        
+        float currentZRotation = body.rotation.eulerAngles.z;
+        if (currentZRotation > 180f)
+        {
+            currentZRotation -= 360f;
+        }
 
-        translationCenter.position = new Vector3(offsetX, translationCenter.position.y, translationCenter.position.z);
+        float offsetX = Mathf.Lerp(lowerXBound, upperXBound,
+            (currentZRotation - lowerRotationBound) / (upperRotationBound - lowerRotationBound));
+
+        if (lowerXBound.Equals(upperXBound))
+        {
+            offsetX = lowerXBound;
+        }
+
+        //TODO: THIS IS UGLY
+        if (moveOnXAxis)
+        {
+            translationCenter.position = new Vector3(offsetX, translationCenter.position.y, translationCenter.position.z);
+        }
+        else
+        {
+            translationCenter.position = new Vector3(translationCenter.position.x, offsetX, translationCenter.position.z);
+
+        }
     }
 
     private void CalcMirrorRotation()

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
-  initTimer: 1
+  initTimer: 0.2
   door: {fileID: 0}
   receiveDeadlyLaser: 0
   greenMaterial: {fileID: 2100000, guid: 23bbbd3ccc77d8044bfd2e2bd66e0d36, type: 2}
