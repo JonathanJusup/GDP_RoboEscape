@@ -13,8 +13,8 @@ public class Laser : MonoBehaviour
     private Material mat;
     private LineRenderer lineRenderer;
 
-    private Color greenColor = new Color(0.0f, 1.0f, 0.0f, 0.5f);
-    private Color redColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+    private Color greenColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+    private Color redColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 
     public void InitLaser(Vector3 position, Vector3 direction, Material material, bool isDeadly)
     {
@@ -30,8 +30,8 @@ public class Laser : MonoBehaviour
     {
         lineRenderer = this.AddComponent<LineRenderer>();
         lineRenderer.material = mat;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
         lineRenderer.SetPosition(0, pos);
 
         if (isDeadly)

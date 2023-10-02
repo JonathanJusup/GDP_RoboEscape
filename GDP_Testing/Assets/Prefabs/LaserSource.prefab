@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac23250b5b8b4bb4eb7d83db63a7c858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: af230faa46dd5014195b06f34e7c3eff, type: 2}
+  material: {fileID: 2100000, guid: f2627df3373184e458a418de5ef52ea1, type: 2}
+  pressurePlate: {fileID: 0}
 --- !u!1001 &3633179373091760026
 PrefabInstance:
   m_ObjectHideFlags: 0
