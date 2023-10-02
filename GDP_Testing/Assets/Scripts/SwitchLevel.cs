@@ -34,5 +34,11 @@ public class SwitchLevel : MonoBehaviour
             // Load or switch to level 3
             SceneManager.LoadScene(2);
         }
+        // Check if the 'R' key is pressed
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Load or switch to current base level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
