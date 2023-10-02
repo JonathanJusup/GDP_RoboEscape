@@ -8,6 +8,10 @@ public class Robo1Behaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentPosition = transform.position; // temporäres modell hat falschen ursprung, hier fix für shooting detection
+        currentPosition.y += 1f; 
+         
+
 
     }
 
@@ -17,12 +21,18 @@ public class Robo1Behaviour : MonoBehaviour
     public float shootingCooldown = 3f; // time between shots
     public float bulletSpeed = 5f;
     private float lastShotTime = 0f;
+    private Vector3 currentPosition;
+    
 
     private void Update()
     {
         //check player visibility
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, shootingRange))
+        
+        //function um shootingrange zu sehen
+        Debug.DrawRay(currentPosition, transform.forward * shootingRange, Color.red);
+       
+        if (Physics.Raycast(currentPosition, transform.forward, out hit, shootingRange))
         {
             if (hit.collider.CompareTag("Player"))
             {
@@ -30,6 +40,7 @@ public class Robo1Behaviour : MonoBehaviour
                 if (Time.time - lastShotTime >= shootingCooldown)
                 {
                     Shoot();
+                    Debug.Log("shooting");
                 }
             }
         }
