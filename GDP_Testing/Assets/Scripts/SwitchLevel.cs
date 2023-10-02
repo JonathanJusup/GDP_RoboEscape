@@ -48,5 +48,11 @@ public class SwitchLevel : MonoBehaviour
             // Load or switch to current base level
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+        
     }
 }
