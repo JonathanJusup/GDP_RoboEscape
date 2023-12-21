@@ -7,6 +7,7 @@ public class SwitchController : MonoBehaviour
     [SerializeField] private float initTimer = 1.0f;
     private float m_CurrentTimer;
     [SerializeField] private Door door;
+    private CableController cableController;
 
     public bool receiveDeadlyLaser;
     [SerializeField] private Material greenMaterial;
@@ -16,6 +17,7 @@ public class SwitchController : MonoBehaviour
     void Start()
     {
         m_CurrentTimer = initTimer;
+        cableController = this.GetComponent<CableController>();
         
         //TODO: Fix this somehow
         this.GetComponentInChildren<Renderer>().materials[1] = receiveDeadlyLaser ? redMaterial : greenMaterial;
@@ -34,6 +36,7 @@ public class SwitchController : MonoBehaviour
             else
             {
                 door.Open();
+                cableController.UpdateState(m_IsActive);
             }
 
         }
@@ -41,6 +44,7 @@ public class SwitchController : MonoBehaviour
         {
             m_CurrentTimer = initTimer;
             door.Close();
+            cableController.UpdateState(m_IsActive);
         }
     }
 

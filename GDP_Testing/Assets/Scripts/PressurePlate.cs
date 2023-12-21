@@ -9,14 +9,20 @@ public class PressurePlate : MonoBehaviour
 {
     //public GameObject toggleableObject;
     [SerializeField] private bool m_IsPressed;
+    private CableController cableController;
 
     public bool isPressed => m_IsPressed;
+
+    private void Start() {
+        cableController = this.GetComponent<CableController>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (!m_IsPressed)
         {
             m_IsPressed = true;
+            cableController.UpdateState(m_IsPressed);
         }
     }
 
@@ -25,6 +31,7 @@ public class PressurePlate : MonoBehaviour
         if (m_IsPressed)
         {
             m_IsPressed = false;
+            cableController.UpdateState(m_IsPressed);
         }
     }
 

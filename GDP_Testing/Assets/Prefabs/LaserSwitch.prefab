@@ -107,6 +107,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 640690272f856f24c9f03b86fb17ebda, type: 3}
       insertIndex: -1
       addedObject: {fileID: 949512013811129481}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 640690272f856f24c9f03b86fb17ebda, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5294643529902228657}
   m_SourcePrefab: {fileID: 100100000, guid: 640690272f856f24c9f03b86fb17ebda, type: 3}
 --- !u!1 &6084218396739373747 stripped
 GameObject:
@@ -152,6 +155,21 @@ MonoBehaviour:
   receiveDeadlyLaser: 0
   greenMaterial: {fileID: 2100000, guid: 23bbbd3ccc77d8044bfd2e2bd66e0d36, type: 2}
   redMaterial: {fileID: 2100000, guid: 261cb9c55130c9c4b9618c1522e37242, type: 2}
+--- !u!114 &5294643529902228657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084218396739373747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d9117454ba2244f8788a76d52d873a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cableContainer: {fileID: 0}
+  colorOff: {r: 0, g: 0, b: 0, a: 1}
+  colorOn: {r: 0, g: 1, b: 1, a: 1}
 --- !u!4 &6855794515999739913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 640690272f856f24c9f03b86fb17ebda, type: 3}
