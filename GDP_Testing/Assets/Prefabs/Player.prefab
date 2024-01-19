@@ -211,12 +211,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3095932093075715154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e434e7c27d2ddbe47a3bd06233d62bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
   jumpPower: 70
+  isGrounded: 1
   isOnGround: 0
   dies: 0
