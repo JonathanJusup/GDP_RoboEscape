@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4802163013675078933}
-  - component: {fileID: 3696963357683958535}
+  - component: {fileID: 6785082723314445926}
   - component: {fileID: 7253828808562740519}
   m_Layer: 0
   m_Name: Foot
@@ -27,14 +27,14 @@ Transform:
   m_GameObject: {fileID: 1186137331148710576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.529, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7394845744732415568}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3696963357683958535
-SphereCollider:
+--- !u!65 &6785082723314445926
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -43,7 +43,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -52,8 +52,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.48
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Center: {x: 0, y: -0.95, z: 0}
 --- !u!114 &7253828808562740519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.7, z: 0.9}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4802163013675078933}
@@ -161,7 +161,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3095932093075715154}
-  m_Material: {fileID: 13400000, guid: aebb27401340009498638939d8cfff74, type: 2}
+  m_Material: {fileID: 13400000, guid: 0ad821a1169d5524aa2c2e3a15acb9a3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -203,7 +203,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9168194511319611746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,14 +211,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3095932093075715154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e434e7c27d2ddbe47a3bd06233d62bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpPower: 8
+  jumpPower: 70
   isGrounded: 1
+  isOnGround: 0
   dies: 0
-  fallMultiplier: 2
-  lowJumpMultiplier: 2
