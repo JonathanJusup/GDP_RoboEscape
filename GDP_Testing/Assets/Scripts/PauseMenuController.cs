@@ -54,13 +54,8 @@ public class PauseMenuController : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        
-        AudioManager audioManager = FindObjectOfType<AudioManager>();
-        if (audioManager != null)
-        {
-            Debug.Log("IST NICHT NULL");
-        }
-        Destroy(audioManager);
+
+        IsPaused = false;
     }
 
 
