@@ -19,15 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip levelMusic;
     public AudioClip menuMusic;
 
-
-    private void Awake()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            
-            
-        }
-    }
+    
 
     void Start()
     {
