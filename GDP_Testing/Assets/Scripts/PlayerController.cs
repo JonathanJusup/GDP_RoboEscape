@@ -64,20 +64,24 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
         */
-        
-        
-        animator.SetBool("isGrounded", isGrounded);
+
+        if (!PauseMenuController.IsPaused)
+        {
+            animator.SetBool("isGrounded", isGrounded);
 
         
-        Jump();
-        Move();
+            Jump();
+            Move();
         
-        //Increase Gravity when falling, keep it lower, when high jumping
-        if (rb.velocity.y < 0) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-        } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+            //Increase Gravity when falling, keep it lower, when high jumping
+            if (rb.velocity.y < 0) {
+                rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
+            } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
+                rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+            }
         }
+            
+
     }
 
 

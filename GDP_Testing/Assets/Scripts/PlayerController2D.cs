@@ -23,15 +23,21 @@ public class PlayerController2D : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        Jump();
-        Move();
+
+        if (!PauseMenuController.IsPaused)
+        {
+            Jump();
+            Move();
         
-        // Hier wird die Gravitation erhöht, um den Fall zu beschleunigen
-        if (rb.velocity.y < 0) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-        } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+            // Hier wird die Gravitation erhöht, um den Fall zu beschleunigen
+            if (rb.velocity.y < 0) {
+                rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
+            } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
+                rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+            }
         }
+           
+
     }
 
     void OnCollisionEnter(Collision collision)
