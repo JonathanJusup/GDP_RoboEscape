@@ -9,11 +9,13 @@ public class PauseMenuController : MonoBehaviour
  
     
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject controls;
     public static bool IsPaused;
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
+        controls.SetActive(false);
         IsPaused = false;
     }
 
@@ -34,7 +36,6 @@ public class PauseMenuController : MonoBehaviour
     }
     
     
-    
     private void PauseGame()
     {
         pauseMenu.SetActive(true);
@@ -46,16 +47,37 @@ public class PauseMenuController : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        controls.SetActive(false);
         Time.timeScale = 1.0f;
         IsPaused = false;
     }
 
+    public void CloseControls()
+    {
+        pauseMenu.SetActive(true);
+        controls.SetActive(false);
+    }
+    
+    public void OpenControls()
+    {
+        pauseMenu.SetActive(false);
+        controls.SetActive(true);
+    }
+    
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        IsPaused = false;
+        Time.timeScale = 1.0f;
+    }
 
     public void BackToMenu()
     {
+        IsPaused = false;
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("MainMenu");
 
-        IsPaused = false;
+        
     }
 
 
@@ -64,5 +86,7 @@ public class PauseMenuController : MonoBehaviour
         
         Application.Quit();
     }
+    
+    
     
 }

@@ -21,6 +21,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropDownResolutions;
     [SerializeField] private TMP_Dropdown dropDownGraphicsLevel;
     [SerializeField] private Toggle toggleWindowMode;
+    [SerializeField] private GameObject controls;
 
 
     private float _currentVolume;
@@ -41,10 +42,19 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.fullScreen = true;
-        optionsMenu.SetActive(false);
+        if (Screen.fullScreen == false)
+        {
+            toggleWindowMode.isOn = true;
+        }
+        else
+        {
+            toggleWindowMode.isOn = false;
+        }
+            optionsMenu.SetActive(false);
+        controls.SetActive(false);
         _currentWindowModeToggle = toggleWindowMode.isOn;
-        _currentVolume = soundSlider.value;
+        _currentVolume = PlayerPrefs.GetFloat("musicVolume", soundSlider.value);
+        soundSlider.value = _currentVolume;
         InitResolutionDropdown();
         InitGraphicsDropdown(PlayerPrefs.GetInt("masterGraphics", 1));
         // The disabling of the buttons Needs to be last at all times, delete this comment when finishing the project
@@ -65,6 +75,18 @@ public class MenuController : MonoBehaviour
     public void LoadSandboxLevel()
     {
         SceneManager.LoadScene("Sandbox");
+    }
+
+    public void OpenControls()
+    {
+        controls.SetActive(true);
+        optionsMenu.SetActive(false);
+    }
+
+    public void CloseControls()
+    {
+        controls.SetActive(false);
+        optionsMenu.SetActive(true);
     }
     
     
@@ -151,14 +173,16 @@ public class MenuController : MonoBehaviour
     {
         if (_isChangedVolume)
         {
-          //  PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
+            PlayerPrefs.SetFloat("musicVolume", soundSlider.value);
             _isChangedVolume = false;
         }
         
         if (_isChangedResolution)
         {
             Screen.SetResolution(_resolutionWidth, _resolutionHeight, !_isWindowed);
+            
             _currentResolutionIndex = dropDownResolutions.value;
+            PlayerPrefs.SetInt("masterResolution", _currentResolutionIndex);
             _isChangedResolution = false;
         }
 
@@ -221,18 +245,15 @@ public class MenuController : MonoBehaviour
         for (int i = 0; i < screenResolutions.Length; i++)
         {
             resolutions.Add(screenResolutions[i].width + "x" + screenResolutions[i].height);
-        }
-        dropDownResolutions.AddOptions(resolutions);
-        
-        for (int i = 0; i < screenResolutions.Length; i++)
-        {
             if (Screen.currentResolution.width == screenResolutions[i].width &&
                 Screen.currentResolution.height == screenResolutions[i].height)
             {
+                Debug.Log("RES INDEX: " + i);
                 dropDownResolutions.SetValueWithoutNotify(i); ;
                 _currentResolutionIndex = i;
             }
         }
+        dropDownResolutions.AddOptions(resolutions);
     }
 
 
