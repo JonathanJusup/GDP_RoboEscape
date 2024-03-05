@@ -56,7 +56,7 @@ public class Laser : MonoBehaviour
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         
-        if (Physics.Raycast(ray, out hit, 100, 1))
+        if (Physics.Raycast(ray, out hit, 100))
         {
             ProcessHit(hit);
         }

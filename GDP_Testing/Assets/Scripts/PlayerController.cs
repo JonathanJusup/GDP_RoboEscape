@@ -39,49 +39,21 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        /*
-        // Get player input
-        horizontalMovement = Input.GetAxis("Horizontal");
-
-        // Check if the player is moving
-        IsMoving = Mathf.Abs(horizontalMovement) > 0.1f;
-
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        if (PauseMenuController.IsPaused) {
+            return;
+        }
+        
         animator.SetBool("isGrounded", isGrounded);
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f)) {
-            Debug.Log("Raycast hit the ground at: " + hit.point + isGrounded);
-        }
-        else {
-            Debug.Log("Raycast did not hit anything." + isGrounded + "isses");
-        }
-
-        Debug.DrawRay(transform.position, Vector3.down * 0.2f, Color.red);
-
-
-        if (Input.GetButtonDown("Jump") && isGrounded) {
-            animator.SetTrigger("JumpTrigger");
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        }
-        */
-
-        if (!PauseMenuController.IsPaused)
-        {
-            animator.SetBool("isGrounded", isGrounded);
-
         
-            Jump();
-            Move();
+        Jump();
+        Move();
         
-            //Increase Gravity when falling, keep it lower, when high jumping
-            if (rb.velocity.y < 0) {
-                rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-            } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
-                rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
-            }
+        //Increase Gravity when falling, keep it lower, when high jumping
+        if (rb.velocity.y < 0) {
+            rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
+        } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
+            rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
         }
-            
-
     }
 
 

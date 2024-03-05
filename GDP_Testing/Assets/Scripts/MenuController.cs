@@ -242,11 +242,21 @@ public class MenuController : MonoBehaviour
     {
         List<string> resolutions = new List<string>();
         Resolution[] screenResolutions = Screen.resolutions;
-        for (int i = 0; i < screenResolutions.Length; i++)
+
+        List<Resolution> filteredResolutions = new List<Resolution>();
+        RefreshRate fps = Screen.currentResolution.refreshRateRatio;
+        
+        for (int i = 0; i < screenResolutions.Length; i++) {
+            if (screenResolutions[i].refreshRateRatio.Equals(fps)) {
+                filteredResolutions.Add(screenResolutions[i]);
+            }
+        }
+        
+        for (int i = 0; i < filteredResolutions.Count; i++)
         {
-            resolutions.Add(screenResolutions[i].width + "x" + screenResolutions[i].height);
-            if (Screen.currentResolution.width == screenResolutions[i].width &&
-                Screen.currentResolution.height == screenResolutions[i].height)
+            resolutions.Add(filteredResolutions[i].width + "x" + filteredResolutions[i].height);
+            if (Screen.currentResolution.width == filteredResolutions[i].width &&
+                Screen.currentResolution.height == filteredResolutions[i].height)
             {
                 Debug.Log("RES INDEX: " + i);
                 dropDownResolutions.SetValueWithoutNotify(i); ;
