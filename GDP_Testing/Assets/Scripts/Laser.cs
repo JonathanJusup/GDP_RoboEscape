@@ -49,9 +49,6 @@ public class Laser : MonoBehaviour
             lineRenderer.startColor = greenColor;
             lineRenderer.endColor = greenColor;
         }
-
-        
-
         
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;

@@ -21,6 +21,7 @@ public class PressurePlate : MonoBehaviour
     {
         if (!m_IsPressed)
         {
+            
             m_IsPressed = true;
             cableController.UpdateState(m_IsPressed);
         }
@@ -34,6 +35,16 @@ public class PressurePlate : MonoBehaviour
             cableController.UpdateState(m_IsPressed);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!m_IsPressed)
+        {
+            FindObjectOfType<SoundManager>().PlaySound("Button");
+        }
+        
+    }
+
 
     /*
     private void OnTriggerEnter(Collider other)

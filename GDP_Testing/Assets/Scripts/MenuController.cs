@@ -42,6 +42,7 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy (GameObject.Find("SoundManager"));
         if (Screen.fullScreen == false)
         {
             toggleWindowMode.isOn = true;

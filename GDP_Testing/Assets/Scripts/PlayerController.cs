@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour {
             //Execute jump
             rb.velocity = Vector3.up * jumpPower; 
             isGrounded = false;
+            FindObjectOfType<SoundManager>().PlaySound("Jump");
 
             animator.SetTrigger("JumpTrigger");
         }
@@ -123,6 +124,7 @@ public class PlayerController : MonoBehaviour {
         CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
         cubeSpawner.SpawnCubes(playerPos);
         
+        FindObjectOfType<SoundManager>().PlaySound("PlayerDeath");
         //Zerstöre PlayerController
         Destroy(this);
     }
