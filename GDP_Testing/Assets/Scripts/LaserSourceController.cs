@@ -22,6 +22,7 @@ public class LaserSourceController : MonoBehaviour
         if (pressurePlate != null) {
             isControlled = true;
         }
+        
     }
 
     // Update is called once per frame
@@ -39,6 +40,8 @@ public class LaserSourceController : MonoBehaviour
 
         if (isActive && !particleSystem.isPlaying) {
             particleSystem.Play();
+            
+            
         }
         else if (!isActive && particleSystem.isPlaying) {
             particleSystem.Stop();

@@ -29,6 +29,10 @@ public class MeltingController : MonoBehaviour
             // Interpoliere die Skalierung, um den Schmelzeffekt zu erzeugen
             Vector3 newScale = Vector3.Lerp(initialScale, Vector3.zero, meltProgress);
             transform.localScale = newScale;
+            if (meltProgress <= 0.01f)
+            {
+                FindObjectOfType<SoundManager>().PlaySound("Melt");
+            }
             if (meltProgress == 1.0f)
             {
                 Debug.Log("STOP MELTING");
@@ -43,6 +47,7 @@ public class MeltingController : MonoBehaviour
     // Methode, um den Schmelzvorgang zu starten
     public void StartMelting()
     {
+        
         m_Material.EnableKeyword("_EMISSION");
         m_Material.SetColor("_EmissionColor", Color.red);
         m_Material.SetFloat("_EmissionScaleUI", 2.0f); 

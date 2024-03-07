@@ -7656,19 +7656,37 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: BackgroundMusic
     audioClip: {fileID: 8300000, guid: aad7a7fba16964d45be7c4ebe62a3ae1, type: 3}
-    volume: 0.291
+    volume: 0.395
     pitch: 1.03
     loop: 1
     source: {fileID: 0}
   - name: Jump
     audioClip: {fileID: 8300000, guid: 63f873963fb248844b807045063ffddb, type: 3}
-    volume: 0.591
+    volume: 0.323
     pitch: 1.03
     loop: 0
     source: {fileID: 0}
   - name: Button
     audioClip: {fileID: 8300000, guid: b62ac67656d515c42a894cc018372d15, type: 3}
     volume: 0.1
+    pitch: 1.03
+    loop: 0
+    source: {fileID: 0}
+  - name: Melt
+    audioClip: {fileID: 8300000, guid: eebd237f48cb4af4182c9a61f9e373da, type: 3}
+    volume: 1
+    pitch: 1.03
+    loop: 0
+    source: {fileID: 0}
+  - name: Laser
+    audioClip: {fileID: 8300000, guid: 4c0cfdcda6640a1478c8c9160578aeae, type: 3}
+    volume: 0.3
+    pitch: 1.03
+    loop: 1
+    source: {fileID: 0}
+  - name: Door
+    audioClip: {fileID: 8300000, guid: 1a1dd63e73bd2064cbc87097e08b0953, type: 3}
+    volume: 0.3
     pitch: 1.03
     loop: 0
     source: {fileID: 0}
@@ -21519,6 +21537,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5876068943869959546, guid: 715ad73b286574c4cbfe7db1a2802017, type: 3}
+      propertyPath: _soundManager
+      value: 
+      objectReference: {fileID: 475764672}
     - target: {fileID: 7757567961174724282, guid: 715ad73b286574c4cbfe7db1a2802017, type: 3}
       propertyPath: m_Name
       value: LaserSource

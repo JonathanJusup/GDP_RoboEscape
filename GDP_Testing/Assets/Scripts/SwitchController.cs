@@ -26,6 +26,7 @@ public class SwitchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool initialDoorState = door.GetIsOpen();
         if (m_IsActive)
         {
             m_CurrentTimer -= Time.deltaTime;
@@ -35,6 +36,7 @@ public class SwitchController : MonoBehaviour
             }
             else
             {
+               
                 door.Open();
                 cableController.UpdateState(m_IsActive);
             }
@@ -45,6 +47,12 @@ public class SwitchController : MonoBehaviour
             m_CurrentTimer = initTimer;
             door.Close();
             cableController.UpdateState(m_IsActive);
+        }
+
+        if (door.GetIsOpen() != initialDoorState)
+        {
+            Debug.Log(door.GetIsOpen() != initialDoorState);
+            FindObjectOfType<SoundManager>().PlaySound("Door");
         }
     }
 
