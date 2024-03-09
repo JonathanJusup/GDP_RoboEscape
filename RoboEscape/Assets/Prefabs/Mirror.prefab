@@ -150,15 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e26bb9fc76f9e4e8478fdbd7aa1141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftRotationTrigger: {fileID: 0}
-  rightRotationTrigger: {fileID: 0}
+  leftTrigger: {fileID: 0}
+  rightTrigger: {fileID: 0}
   translationCenter: {fileID: 1060458280542804894}
   body: {fileID: 7814531928437602973}
   rotationSpeed: 3
-  lowerRotationBound: -45
-  upperRotationBound: 45
-  lowerXBound: -0.5
-  upperXBound: 0.5
+  rotationLower: 0
+  rotationUpper: 0
+  shiftHorizontally: 1
 --- !u!1 &7277239227850624838
 GameObject:
   m_ObjectHideFlags: 0

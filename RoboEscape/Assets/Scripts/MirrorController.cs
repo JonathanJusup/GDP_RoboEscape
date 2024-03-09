@@ -1,112 +1,96 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MirrorController : MonoBehaviour
-{
-    [SerializeField] private trigger leftRotationTrigger;
-    [SerializeField] private trigger rightRotationTrigger;
-    
+public class MirrorController : MonoBehaviour {
+    [SerializeField] private Trigger leftTrigger;
+    [SerializeField] private Trigger rightTrigger;
+
     [SerializeField] private Transform translationCenter;
     [SerializeField] private Transform body;
 
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float lowerRotationBound;
-    [SerializeField] private float upperRotationBound;
-
-    [SerializeField] private float lowerXBound = -0.5f;
-    [SerializeField] private float upperXBound = 0.5f;
+    [SerializeField] private float rotationSpeed;           //Rotation Speed
+    [SerializeField] private float rotationLower;           //Lower Rotation bound
+    [SerializeField] private float rotationUpper;           //Upper rotation bound
     
-    private float m_OffsetLowerBound;
-    private float m_OffsetUpperBound;
+    [SerializeField] private bool shiftHorizontally = true;     //Flag, if Mirror moves horizontally or vertically
+    /*[SerializeField] */private float shiftLower = -0.5f;    //Lower movement bound
+    /*[SerializeField] */private float shiftUpper = 0.5f;     //Upper movement bound
 
-    private Quaternion m_InitialRotation;
-    private float m_CurrentRotation = 0.0f;
+    
+    private Quaternion _initRotation;
+    private float _currentRotation = 0.0f;
+    private float _offsetLower;
+    private float _offsetUpper;
 
-    [SerializeField] private bool moveOnXAxis = true;
 
+    private void Start() {
+        _initRotation = body.rotation;
+        _offsetLower = rotationLower - body.transform.eulerAngles.z;
+        _offsetUpper = rotationUpper - body.transform.eulerAngles.z;
 
-
-    private void Start()
-    {
-        m_InitialRotation = body.rotation;
-        m_OffsetLowerBound = lowerRotationBound - body.transform.eulerAngles.z;
-        m_OffsetUpperBound = upperRotationBound - body.transform.eulerAngles.z;
-        
         Vector3 initPosition = transform.position;
-        lowerXBound += moveOnXAxis ? initPosition.x : initPosition.y;
-        upperXBound += moveOnXAxis ? initPosition.x : initPosition.y;
+        shiftLower += shiftHorizontally ? initPosition.x : initPosition.y;
+        shiftUpper += shiftHorizontally ? initPosition.x : initPosition.y;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        CalcMirrorRotation();
+    void Update() {
+        if (!leftTrigger && !rightTrigger) {
+            return;
+        }
 
+        CalcMirrorRotation();
         
         float currentZRotation = body.rotation.eulerAngles.z;
-        if (currentZRotation > 180f)
-        {
+        if (currentZRotation > 180f) {
             currentZRotation -= 360f;
         }
 
-        float offsetX = Mathf.Lerp(lowerXBound, upperXBound,
-            (currentZRotation - lowerRotationBound) / (upperRotationBound - lowerRotationBound));
+        float offsetX = Mathf.Lerp(shiftLower, shiftUpper,
+            (currentZRotation - rotationLower) / (rotationUpper - rotationLower));
 
-        if (lowerXBound.Equals(upperXBound))
-        {
-            offsetX = lowerXBound;
+        if (shiftLower.Equals(shiftUpper)) {
+            offsetX = shiftLower;
         }
 
         //TODO: THIS IS UGLY
-        if (moveOnXAxis)
-        {
-            translationCenter.position = new Vector3(offsetX, translationCenter.position.y, translationCenter.position.z);
+        if (shiftHorizontally) {
+            translationCenter.position =
+                new Vector3(offsetX, translationCenter.position.y, translationCenter.position.z);
         }
-        else
-        {
-            translationCenter.position = new Vector3(translationCenter.position.x, offsetX, translationCenter.position.z);
-
+        else {
+            translationCenter.position =
+                new Vector3(translationCenter.position.x, offsetX, translationCenter.position.z);
         }
     }
 
-    private void CalcMirrorRotation()
-    {
+    private void CalcMirrorRotation() {
         float rotationFactor = 0.0f;
-        
-        if (leftRotationTrigger && rightRotationTrigger)
-        {
-            if (leftRotationTrigger.isPressed && !rightRotationTrigger.isPressed)
-            {
+
+        if (leftTrigger && rightTrigger) {
+            //If both triggers are assigned
+
+            if (leftTrigger.isPressed && !rightTrigger.isPressed) {
                 //Rotate CounterClockwise
                 rotationFactor = 1.0f;
-            } 
-            else if (!leftRotationTrigger.isPressed && rightRotationTrigger.isPressed)
-            {
+            }
+            else if (!leftTrigger.isPressed && rightTrigger.isPressed) {
                 //Rotate Clockwise
                 rotationFactor = -1.0f;
             }
-        } 
-        else if (leftRotationTrigger)
-        {
-            if (leftRotationTrigger.isPressed)
-            {
-                rotationFactor = 1.0f;
-            }
-        } 
-        else if (rightRotationTrigger)
-        {
-            if (rightRotationTrigger.isPressed)
-            {
-                rotationFactor = -1.0f;
-            }
         }
-        
-        
-        m_CurrentRotation += rotationFactor * rotationSpeed * Time.deltaTime;
-        m_CurrentRotation = Mathf.Clamp(m_CurrentRotation, m_OffsetLowerBound, m_OffsetUpperBound);
-        body.rotation = m_InitialRotation * Quaternion.Euler(0.0f, 0.0f, m_CurrentRotation);
+        else if (leftTrigger && leftTrigger.isPressed) {
+            //If only left trigger is assigned and pressed
+            rotationFactor = 1.0f;
+        }
+        else if (rightTrigger && rightTrigger.isPressed) {
+            //If only right trigger is assigned and pressed
+            rotationFactor = -1.0f;
+        }
+
+
+        _currentRotation += rotationFactor * rotationSpeed * Time.deltaTime;
+        _currentRotation = Mathf.Clamp(_currentRotation, _offsetLower, _offsetUpper);
+        body.rotation = _initRotation * Quaternion.Euler(0.0f, 0.0f, _currentRotation);
     }
 }

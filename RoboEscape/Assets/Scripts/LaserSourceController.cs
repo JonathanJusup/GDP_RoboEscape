@@ -9,7 +9,7 @@ public class LaserSourceController : MonoBehaviour
     public Material material;
     private GameObject firstLaser;
 
-    [FormerlySerializedAs("pressurePlate")] [SerializeField] private trigger trigger;
+    [FormerlySerializedAs("pressurePlate")] [SerializeField] private Trigger trigger;
 
     private bool isControlled;
     private bool isActive = true;

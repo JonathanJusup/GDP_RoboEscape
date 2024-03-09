@@ -5,25 +5,27 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class trigger : MonoBehaviour
+public class Trigger : MonoBehaviour
 {
     //public GameObject toggleableObject;
     [SerializeField] private bool m_IsPressed;
-    private CableController cableController;
+    private CableController _cableController;
+    private SoundManager _soundManager;
 
     public bool isPressed => m_IsPressed;
 
     private void Start() {
-        cableController = this.GetComponent<CableController>();
+        _cableController = this.GetComponent<CableController>();
     }
-
+    
+    
     private void OnTriggerStay(Collider other)
     {
         if (!m_IsPressed)
         {
             
             m_IsPressed = true;
-            cableController.UpdateState(m_IsPressed);
+            _cableController.UpdateState(m_IsPressed);
         }
     }
 
@@ -32,7 +34,7 @@ public class trigger : MonoBehaviour
         if (m_IsPressed)
         {
             m_IsPressed = false;
-            cableController.UpdateState(m_IsPressed);
+            _cableController.UpdateState(m_IsPressed);
         }
     }
 
