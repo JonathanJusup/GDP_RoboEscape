@@ -10,15 +10,20 @@
 # Jonathan
 - Level Design
 - Feinjustierung Spiegel
-- Post Processing
+- neue Level konzipieren
 - Schrauben, Laser Source, etc. modellieren
 - Dekoration
 
 # Flo
 - Menu Rework + (Simple Background Scene)
 - Sound & Musik (+Bug Fixes)
-- (Level Konzept)
+- neue Level konzipieren
 - Dekoration
+
+- automatische Neustart, nach X Sekunden Tod
+- Button Animation
 
 # Sam
 - Animation (Sprung Fixen)
+- separate Roboter Einzelteile (Modelle)
+- neue Level konzipieren
