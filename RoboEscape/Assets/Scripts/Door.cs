@@ -6,8 +6,6 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     private bool isOpen = false;
-    private bool playDoorOpenSound = true;
-    private bool playDoorCloseSound = true;
 
     public void Open()
     {
