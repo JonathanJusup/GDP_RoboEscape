@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
             //Execute jump
             rb.velocity = Vector3.up * jumpPower; 
             isGrounded = false;
-            FindObjectOfType<SoundManager>().PlaySound("Jump");
+           // FindObjectOfType<SoundManager>().PlaySound("Jump");
 
             animator.SetTrigger("JumpTrigger");
         }
