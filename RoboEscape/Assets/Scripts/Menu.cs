@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 using UnityEngine.UI;
@@ -11,20 +12,20 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private TMP_Dropdown dropdownResolutions;
     [SerializeField] private TMP_Dropdown dropdownGraphics;
-    [SerializeField] private TMP_Text audioText;
     [SerializeField] private Toggle toggleFullscreen;
-    [SerializeField] private Slider audioSlider;
     [SerializeField] private GameObject controlsMenu;
+    
+    
     void Start()
     {
         Destroy (GameObject.Find("SoundManager"));
+        Destroy (GameObject.Find("PauseMenu"));
         settingsMenu.SetActive(false);
         InitResolutionDropdown();
         toggleFullscreen.isOn = Screen.fullScreen;
 
         // TODO ALLES MIT AUDIO WOMÖGLICH LIEBER IN SOUND SCRIPT EINFÜGEN 
-        audioSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("masterVolume", 0.3f));
-        audioText.text = (audioSlider.value * 100.0f).ToString("0") + "%";
+        
         dropdownGraphics.SetValueWithoutNotify(PlayerPrefs.GetInt("masterGraphics", 1));
         dropdownResolutions.SetValueWithoutNotify(PlayerPrefs.GetInt("masterResolution", dropdownResolutions.options.Count));
 
@@ -71,13 +72,7 @@ public class Menu : MonoBehaviour
     }
 
 
-    public void SetVolume(float volume)
-    {
-        audioText.text = (volume * 100.0f).ToString("0") + "%";
-        PlayerPrefs.SetFloat("masterVolume", volume);
-        Debug.Log("CHANGING VOL");
-        PlayerPrefs.Save();
-    }
+    
 
 
     public void SetFullscreenMode(bool isFullscreen)

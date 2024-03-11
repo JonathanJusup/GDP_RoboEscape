@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     public float speed = 5.0f;
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour {
         
         Jump();
         Move();
-        
+
         //Increase Gravity when falling, keep it lower, when high jumping
         if (rb.velocity.y < 0) {
             rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
@@ -120,11 +122,17 @@ public class PlayerController : MonoBehaviour {
         Vector3 playerPos = transform.position;
         CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
         cubeSpawner.SpawnCubes(playerPos);
-        
         FindObjectOfType<SoundManager>().PlaySound("PlayerDeath");
+        StartCoroutine(ResetAfterDelay());
     }
 
     public void SetIsGrounded(bool isGround) {
         isGrounded = isGround;
+    }
+    
+    private IEnumerator ResetAfterDelay()
+    {
+        yield return new WaitForSeconds(3.0f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

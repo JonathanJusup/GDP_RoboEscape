@@ -17,6 +17,7 @@ public class PauseMenuController : MonoBehaviour
         pauseMenu.SetActive(false);
         controls.SetActive(false);
         IsPaused = false;
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class PauseMenuController : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MenuScene");
 
         
     }
