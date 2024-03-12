@@ -8,34 +8,35 @@ public class LaserSourceController : MonoBehaviour
 {
     public Material material;
 
-    [SerializeField] private Trigger _trigger;
-    private bool isActive = true;
+    [SerializeField] private Trigger trigger;
+    [SerializeField] private bool isDeadly = false;
     
-    private ParticleSystem particleSystem;
-    private Transform transformComponent;
+    private bool _isActive = true;
+    private ParticleSystem _particleSystem;
+    private Transform _transformComponent;
     
     [SerializeField] private Light pointLight;
-    [SerializeField] private LaserPool _laserPool;
-    [SerializeField] private Transform _laserContainer;
+    [SerializeField] private LaserPool laserPool;
+    [SerializeField] private Transform laserContainer;
 
     private void Start() {
-        particleSystem = this.GetComponentInChildren<ParticleSystem>();
-        this.transformComponent = this.transform;
+        _particleSystem = this.GetComponentInChildren<ParticleSystem>();
+        this._transformComponent = this.transform;
     }
 
     // Update is called once per frame
     void Update() {
-        if (_trigger) {
-            isActive = _trigger.isPressed;
-            pointLight.enabled = isActive;
+        if (trigger) {
+            _isActive = trigger.isPressed;
+            pointLight.enabled = _isActive;
         }
 
         
         Destroy(GameObject.Find(this.name + "LaserBeam"));
-        if (this.isActive) {
+        if (this._isActive) {
             GameObject firstLaser = new GameObject(this.name + "LaserBeam");
             Laser laserComponent = firstLaser.AddComponent<Laser>();
-            laserComponent.InitLaser(transformComponent.position, transformComponent.right, material, false, this);
+            laserComponent.InitLaser(_transformComponent.position, _transformComponent.right, material, this.isDeadly, this);
         }
         
         
@@ -52,30 +53,30 @@ public class LaserSourceController : MonoBehaviour
             initialLaser.transform.parent = _laserContainer;
             LaserBehaviour laserBehaviour = initialLaser.GetComponent<LaserBehaviour>();
             
-            laserBehaviour.InitLaser(transformComponent.position, transformComponent.right, false, this);
+            laserBehaviour.InitLaser(transformComponent.position, transformComponent.right, this.isDeadly, this);
         }
         */
         
 
         
         //Handle ParticleSystem
-        if (isActive && !particleSystem.isPlaying) {
-            particleSystem.Play();
-        } else if (!isActive && particleSystem.isPlaying) {
-            particleSystem.Stop();
+        if (_isActive && !_particleSystem.isPlaying) {
+            _particleSystem.Play();
+        } else if (!_isActive && _particleSystem.isPlaying) {
+            _particleSystem.Stop();
         }
     }
 
     public void Reset() {
-        foreach (Transform child in _laserContainer) {
+        foreach (Transform child in laserContainer) {
             Destroy(child.gameObject);
             //_laserPool.ResetLaser(child.gameObject);
         }
     }
 
     public void UpdateParticles(Vector3 position, Color color) {
-        particleSystem.transform.position = position;
-        ParticleSystem.MainModule particleSystemMain = particleSystem.main;
+        _particleSystem.transform.position = position;
+        ParticleSystem.MainModule particleSystemMain = _particleSystem.main;
         particleSystemMain.startColor = new ParticleSystem.MinMaxGradient(color, new Color(1.0f, 1.0f, 1.0f));
 
         pointLight.transform.position = position;
@@ -83,11 +84,11 @@ public class LaserSourceController : MonoBehaviour
     }
 
     public GameObject GetLaser() {
-        return _laserPool.GetLaser();
+        return laserPool.GetLaser();
     }
 
     public void ResetLaser(GameObject laser) {
-        _laserPool.ResetLaser(laser);
+        laserPool.ResetLaser(laser);
     }
 }
 

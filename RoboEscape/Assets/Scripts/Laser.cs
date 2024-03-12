@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Laser : MonoBehaviour
 {
@@ -29,7 +25,7 @@ public class Laser : MonoBehaviour
         this.mat = material;
         this.isDeadly = isDeadly;
         this.sourceController = sourceController;
-        this.gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+        this.gameObject.layer = LayerMask.NameToLayer("Laser");
         
         InitLineRenderer();
     }
@@ -42,7 +38,6 @@ public class Laser : MonoBehaviour
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
         lineRenderer.SetPosition(0, pos);
-        this.gameObject.layer = 1;
 
         if (isDeadly)
         {
@@ -95,7 +90,7 @@ public class Laser : MonoBehaviour
             UpdateParticlePosition(hit);
             
             //PlayerController playerController = hit.collider.gameObject.GetComponent<PlayerController>();
-            PlayerController playerController = hit.collider.gameObject.transform.parent.parent.GetComponent<PlayerController>();
+            PlayerController playerController = hit.collider.gameObject.GetComponent<PlayerController>();
             playerController.Die();
             
         } 

@@ -13,17 +13,24 @@ public class MirrorController : MonoBehaviour {
     [SerializeField] private float rotationUpper;           //Upper rotation bound
     
     [SerializeField] private bool shiftHorizontally = true;     //Flag, if Mirror moves horizontally or vertically
-    /*[SerializeField] */private float shiftLower = -0.5f;    //Lower movement bound
-    /*[SerializeField] */private float shiftUpper = 0.5f;     //Upper movement bound
+    [SerializeField] private float shiftLower = -0.5f;    //Lower movement bound
+    [SerializeField] private float shiftUpper = 0.5f;     //Upper movement bound
 
     
     private Quaternion _initRotation;
     private float _currentRotation = 0.0f;
     private float _offsetLower;
     private float _offsetUpper;
+    
+    private Animator _animator;
+    private ParticleSystem _particleSystem;
+
 
 
     private void Start() {
+        _animator = this.GetComponentInChildren<Animator>();
+        _particleSystem = this.GetComponentInChildren<ParticleSystem>();
+        
         _initRotation = body.rotation;
         _offsetLower = rotationLower - body.transform.eulerAngles.z;
         _offsetUpper = rotationUpper - body.transform.eulerAngles.z;
@@ -77,6 +84,15 @@ public class MirrorController : MonoBehaviour {
             else if (!leftTrigger.isPressed && rightTrigger.isPressed) {
                 //Rotate Clockwise
                 rotationFactor = -1.0f;
+            }
+            
+            if (leftTrigger.isPressed && rightTrigger.isPressed) {
+                _animator.SetBool("IsBlocked", true);
+                _particleSystem.Play();
+            }
+            else {
+                _animator.SetBool("IsBlocked", false);
+                _particleSystem.Stop();
             }
         }
         else if (leftTrigger && leftTrigger.isPressed) {
