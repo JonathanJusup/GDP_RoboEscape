@@ -6,20 +6,10 @@ using UnityEngine;
 public class PlayerPropController : MonoBehaviour
 {
     private CapsuleCollider collider;
-    private Material material;
 
     private void Start()
     {
         collider = this.GetComponent<CapsuleCollider>();
-        material = this.gameObject.GetComponent<Renderer>().material;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet"))
-        { 
-            Die();
-        }
     }
 
     public void DieAfterDelay()
@@ -27,7 +17,6 @@ public class PlayerPropController : MonoBehaviour
         collider = null;
         if (!collider)
         {
-            material.color = Color.red;
             StartCoroutine(DieAfterDelayCoroutine());
         }
     }

@@ -5026,7 +5026,7 @@ Transform:
   m_GameObject: {fileID: 7757567961174724282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.139999, y: -10.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5034,6 +5034,7 @@ Transform:
   - {fileID: 8200759421434117632}
   - {fileID: 7554302401191199025}
   - {fileID: 3849377675969488838}
+  - {fileID: 2691148576089940422}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5876068943869959546
@@ -5049,10 +5050,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 50f7a1f400ea38746b7e4c78c48725a7, type: 2}
-  _trigger: {fileID: 0}
+  trigger: {fileID: 0}
+  isDeadly: 0
   pointLight: {fileID: 4731224952785128390}
-  _laserPool: {fileID: 3610826472788006477}
-  _laserContainer: {fileID: 3849377675969488838}
+  laserPool: {fileID: 0}
+  laserContainer: {fileID: 0}
+--- !u!1001 &2509164847013217837
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7974416827484498233}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+      propertyPath: m_Name
+      value: laserSourceV2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+--- !u!4 &2691148576089940422 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
+  m_PrefabInstance: {fileID: 2509164847013217837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3633179373091760026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5104,6 +5168,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
       propertyPath: m_Name
       value: laser_model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -3,6 +3,7 @@ using UnityEngine;
 public class MeltingController : MonoBehaviour
 {
     public float meltingDuration = 15.0f; // Zeitraum, über den das Schmelzen erfolgt
+    private Transform body;
     private Vector3 initialScale;
     private bool isMelting = false;
     private Material m_Material;
@@ -11,10 +12,10 @@ public class MeltingController : MonoBehaviour
 
 
 
-    private void Start()
-    {
-        initialScale = transform.localScale;
-        m_Material = this.gameObject.GetComponent<Renderer>().material;
+    private void Start() {
+        this.body = this.transform.GetChild(0);
+        initialScale = body.localScale;
+        m_Material = body.gameObject.GetComponent<Renderer>().material;
         m_Material.DisableKeyword("_EMISSION");
     }
 
@@ -28,17 +29,16 @@ public class MeltingController : MonoBehaviour
             
             // Interpoliere die Skalierung, um den Schmelzeffekt zu erzeugen
             Vector3 newScale = Vector3.Lerp(initialScale, Vector3.zero, meltProgress);
-            transform.localScale = newScale;
+            body.localScale = newScale;
             if (meltProgress <= 0.01f)
             {
                 FindObjectOfType<SoundManager>().PlaySound("Melt");
             }
-            if (meltProgress == 1.0f)
+            if (meltProgress >= 1.0f)
             {
                 Debug.Log("STOP MELTING");
                 isMelting = !isMelting;
-                GameObject block = GameObject.Find("MeltingBlock");
-                block.SetActive(false);
+                this.gameObject.SetActive(false);
                 
             }
         }

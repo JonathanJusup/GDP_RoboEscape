@@ -15,6 +15,7 @@ public class Trigger : MonoBehaviour
     public bool isPressed => m_IsPressed;
 
     private void Start() {
+        _soundManager = GameObject.FindObjectOfType<SoundManager>();
         _cableController = this.GetComponent<CableController>();
     }
     
@@ -42,7 +43,7 @@ public class Trigger : MonoBehaviour
     {
         if (!m_IsPressed)
         {
-            FindObjectOfType<SoundManager>().PlaySound("Button");
+            _soundManager.PlaySound("Button");
         }
         
     }
