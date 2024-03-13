@@ -9,9 +9,10 @@ public class Trigger : MonoBehaviour
 {
     //public GameObject toggleableObject;
     [SerializeField] private bool m_IsPressed;
+    [SerializeField] private Animator animator;
     private CableController _cableController;
     private SoundManager _soundManager;
-
+    
     public bool isPressed => m_IsPressed;
 
     private void Start() {
@@ -26,6 +27,9 @@ public class Trigger : MonoBehaviour
             
             m_IsPressed = true;
             _cableController.UpdateState(m_IsPressed);
+            animator.ResetTrigger("Up");
+            animator.SetTrigger("Down");
+            Debug.Log("BUTTON STAY");
         }
     }
 
@@ -36,6 +40,10 @@ public class Trigger : MonoBehaviour
             m_IsPressed = false;
             _cableController.UpdateState(m_IsPressed);
         }
+        animator.ResetTrigger("Down");
+        animator.SetTrigger("Up");
+        Debug.Log("BUTTON UP");
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +52,10 @@ public class Trigger : MonoBehaviour
         {
             FindObjectOfType<SoundManager>().PlaySound("Button");
         }
-        
+        animator.ResetTrigger("Up");
+        animator.SetTrigger("Down");
+        Debug.Log("BUTTON DOWN");
+
     }
 
 

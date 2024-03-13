@@ -13,6 +13,7 @@ TagManager:
   - Bullet
   - Switch
   - PlayerProp
+  - Button
   layers:
   - Default
   - TransparentFX

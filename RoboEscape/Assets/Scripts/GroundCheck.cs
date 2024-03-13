@@ -11,6 +11,5 @@ public class GroundCheck : MonoBehaviour
     {
         //TODO: Not everything is ground -> Add condition
         playerController.SetIsGrounded(true);
-        Debug.Log("[ENTER] GROUND");    
     }
 }
