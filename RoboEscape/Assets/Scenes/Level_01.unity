@@ -6061,6 +6061,16 @@ MonoBehaviour:
   - {fileID: 8462354964073787954, guid: 85fc23131f0e7d340beba86070e9d6d7, type: 3}
   - {fileID: 8462354964073787954, guid: 9b60197b4e613a841895e9015dcf23d1, type: 3}
   - {fileID: 8462354964073787954, guid: d96249d9068b1d14698c9bfb867768e5, type: 3}
+  - {fileID: 919132149155446097, guid: 70b80e241c0f8d24d9ce0f900ebdc23e, type: 3}
+  - {fileID: 919132149155446097, guid: 8efdb59f6c4ddf24fba0c07813d4f04a, type: 3}
+  - {fileID: 919132149155446097, guid: 7e7b640e8525a024a97861720297b726, type: 3}
+  - {fileID: 919132149155446097, guid: fc0ab24b1ec7f0447ac55a818f17fc8a, type: 3}
+  - {fileID: 919132149155446097, guid: a314096165b521f40be4432889c8a178, type: 3}
+  - {fileID: 919132149155446097, guid: d9abf25841a66244baace65b3c87a875, type: 3}
+  - {fileID: 919132149155446097, guid: a8ff3202b873f3f42bbe021dff1d7170, type: 3}
+  - {fileID: 919132149155446097, guid: 6da51b03273849343b784b9dd0072489, type: 3}
+  - {fileID: 919132149155446097, guid: 4b34253320d746e49ac6eed9fe2ce02e, type: 3}
+  - {fileID: 919132149155446097, guid: ab6bc2c96ed8b0645bff33a21b667f12, type: 3}
   force: 10
 --- !u!4 &410481863
 Transform:
@@ -7523,7 +7533,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.670914, y: -7.89463, z: -9.95}
+  m_LocalPosition: {x: -11.942907, y: -7.89463, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
