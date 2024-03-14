@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     private float horizontalMovement;
     private Rigidbody rb;
     Animator animator;
+    private SoundManager _soundManager;
+    private RobotPartsSpawner _robotPartsSpawner;
     
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2.0f;
@@ -36,15 +38,22 @@ public class PlayerController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        rb = this.GetComponent<Rigidbody>();
+        animator = this.GetComponent<Animator>();
+        _soundManager = this.GetComponent<SoundManager>();
+        _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
 
         isAlive = true;
     }
 
     // Update is called once per frame
     void Update() {
-        if (PauseMenuController.IsPaused || !this.isAlive) {
+        if (PauseMenuController.IsPaused) {
+            return;
+        }
+
+        if (!this.isAlive) {
+            rb.velocity = Vector3.zero;
             return;
         }
         
@@ -104,9 +113,9 @@ public class PlayerController : MonoBehaviour {
             //Execute jump
             rb.velocity = Vector3.up * jumpPower; 
             isGrounded = false;
-           // FindObjectOfType<SoundManager>().PlaySound("Jump");
 
             animator.SetTrigger("JumpTrigger");
+            _soundManager.PlaySound("Jump");
         }
     }
     
@@ -114,16 +123,17 @@ public class PlayerController : MonoBehaviour {
         if (!isAlive) {
             return;
         }
+        
+        Debug.Log("PLAYER DEATH");
         isAlive = false;
         
         animator.SetTrigger("DeathTrigger");
         
         //player.SetActive(false);
         Vector3 playerPos = transform.position;
-        CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
-        cubeSpawner.SpawnCubes(playerPos);
-        FindObjectOfType<SoundManager>().PlaySound("PlayerDeath");
+        _robotPartsSpawner.SpawnParts(playerPos);
         StartCoroutine(ResetAfterDelay());
+        _soundManager.PlaySound("PlayerDeath");
     }
 
     public void SetIsGrounded(bool isGround) {
@@ -132,6 +142,7 @@ public class PlayerController : MonoBehaviour {
     
     private IEnumerator ResetAfterDelay()
     {
+        Debug.Log("Reset in 3 Seconds");
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

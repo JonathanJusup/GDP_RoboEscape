@@ -88,11 +88,8 @@ public class Laser : MonoBehaviour
         } 
         else if (hit.collider.gameObject.CompareTag("Player") && this.isDeadly) {
             UpdateParticlePosition(hit);
-            
-            //PlayerController playerController = hit.collider.gameObject.GetComponent<PlayerController>();
             PlayerController playerController = hit.collider.gameObject.GetComponent<PlayerController>();
             playerController.Die();
-            
         } 
         else if (hit.collider.gameObject.CompareTag("PlayerProp") && this.isDeadly) {
             UpdateParticlePosition(hit);

@@ -190,6 +190,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3d6501da003795f42b0d40c11b861406, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1056047136408704884}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3d6501da003795f42b0d40c11b861406, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8560905492237069041}
   m_SourcePrefab: {fileID: 100100000, guid: 3d6501da003795f42b0d40c11b861406, type: 3}
 --- !u!1 &7451167384700919287 stripped
 GameObject:
@@ -285,6 +288,35 @@ MonoBehaviour:
   isAlive: 1
   fallMultiplier: 2
   lowJumpMultiplier: 2
+--- !u!114 &8560905492237069041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451167384700919287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e824e913cc474c45924cc9ef8a7953e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfScraps: 10
+  scraps:
+  - {fileID: 8462354964073787954, guid: c45442229dd82df429a4d4ec1a9edede, type: 3}
+  - {fileID: 8462354964073787954, guid: 85fc23131f0e7d340beba86070e9d6d7, type: 3}
+  - {fileID: 8462354964073787954, guid: 9b60197b4e613a841895e9015dcf23d1, type: 3}
+  bodyParts:
+  - {fileID: 2210193529132973615, guid: 40b48ed9a8213754082de59aa7bc3e7c, type: 3}
+  - {fileID: 2210193529132973615, guid: a92c81c0389cfdc47862502035a0790f, type: 3}
+  - {fileID: 409979864346587944, guid: f68cef12da726fc45a0cd1db3814e6aa, type: 3}
+  - {fileID: 409979864346587944, guid: 6375e3215a5e76a4c9f50dbfc3c308c0, type: 3}
+  - {fileID: 6239081790893887961, guid: 7f45fab0f43c08141ac5512b62547151, type: 3}
+  - {fileID: 6239081790893887961, guid: 90e2a693fea1a0b438bd7f38c638abad, type: 3}
+  - {fileID: 6239081790893887961, guid: bd2867c5b72f58341b242b95c96455b0, type: 3}
+  - {fileID: 6239081790893887961, guid: fdee778729e7c2b4baf58681e3a432dc, type: 3}
+  - {fileID: 8187508271547088878, guid: 2c7d7f96b83fd3d429d0978a3060ffda, type: 3}
+  - {fileID: 8187508271547088878, guid: 44473ba26bdb67246b18fe1d1ee1aeaa, type: 3}
+  force: 1
 --- !u!4 &7794620374106457933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3d6501da003795f42b0d40c11b861406, type: 3}

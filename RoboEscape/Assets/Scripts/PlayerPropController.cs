@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class PlayerPropController : MonoBehaviour
 {
-    private CapsuleCollider collider;
+    private CapsuleCollider _collider;
+    private RobotPartsSpawner _robotPartsSpawner;
 
     private void Start()
     {
-        collider = this.GetComponent<CapsuleCollider>();
+        _collider = this.GetComponent<CapsuleCollider>();
+        _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
     }
 
     public void DieAfterDelay()
     {
-        collider = null;
-        if (!collider)
+        _collider = null;
+        if (!_collider)
         {
             StartCoroutine(DieAfterDelayCoroutine());
         }
@@ -30,7 +32,6 @@ public class PlayerPropController : MonoBehaviour
     private void Die()
     {
         this.gameObject.SetActive(false);
-        CubeSpawner cubeSpawner = GameObject.Find("CubeSpawn").GetComponent<CubeSpawner>();
-        cubeSpawner.SpawnCubes(this.transform.position);
+        _robotPartsSpawner.SpawnParts(this.transform.position);
     }
 }
