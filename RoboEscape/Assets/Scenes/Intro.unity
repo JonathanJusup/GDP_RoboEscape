@@ -7891,42 +7891,42 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: aad7a7fba16964d45be7c4ebe62a3ae1, type: 3}
     audioMixer: {fileID: 24300002, guid: b4c353b017bb7474e98484089e99f6b2, type: 2}
     volume: 1
-    pitch: 1.03
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Jump
     audioClip: {fileID: 8300000, guid: 63f873963fb248844b807045063ffddb, type: 3}
     audioMixer: {fileID: 24300002, guid: c3305add313561743b0189679f6d0522, type: 2}
     volume: 0.323
-    pitch: 1.03
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Button
     audioClip: {fileID: 8300000, guid: b62ac67656d515c42a894cc018372d15, type: 3}
     audioMixer: {fileID: 24300002, guid: c3305add313561743b0189679f6d0522, type: 2}
     volume: 0.1
-    pitch: 1.03
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Melt
     audioClip: {fileID: 8300000, guid: eebd237f48cb4af4182c9a61f9e373da, type: 3}
     audioMixer: {fileID: 24300002, guid: c3305add313561743b0189679f6d0522, type: 2}
     volume: 0.27
-    pitch: 1.03
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Laser
     audioClip: {fileID: 8300000, guid: 4c0cfdcda6640a1478c8c9160578aeae, type: 3}
     audioMixer: {fileID: 24300002, guid: c3305add313561743b0189679f6d0522, type: 2}
     volume: 0.3
-    pitch: 1.03
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: Door
     audioClip: {fileID: 8300000, guid: 1a1dd63e73bd2064cbc87097e08b0953, type: 3}
     audioMixer: {fileID: 24300002, guid: c3305add313561743b0189679f6d0522, type: 2}
     volume: 0.3
-    pitch: 1.03
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   audioMixerMusic: {fileID: 24100000, guid: b4c353b017bb7474e98484089e99f6b2, type: 2}
@@ -7935,7 +7935,6 @@ MonoBehaviour:
   audioTextMusic: {fileID: 389470835}
   audioSliderSFX: {fileID: 789468548}
   audioTextSFX: {fileID: 2084958959}
-  audioMixerG: {fileID: 0}
 --- !u!4 &475764673
 Transform:
   m_ObjectHideFlags: 0
@@ -10619,8 +10618,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Controls
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17647,8 +17646,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21118,8 +21117,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21386,7 +21385,7 @@ Transform:
   m_GameObject: {fileID: 1280433685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.679815, y: 61, z: -9.95}
+  m_LocalPosition: {x: -17.98026, y: 61, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23201,8 +23200,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back To Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -26752,8 +26751,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart Level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -35509,8 +35508,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

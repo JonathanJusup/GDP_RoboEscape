@@ -14,13 +14,14 @@ public class LaserSourceController : MonoBehaviour
     private bool _isActive = true;
     private ParticleSystem _particleSystem;
     private Transform _transformComponent;
-    
+    private SoundManager _soundManager;
     [SerializeField] private Light pointLight;
     [SerializeField] private LaserPool laserPool;
     [SerializeField] private Transform laserContainer;
 
     private void Start() {
         _particleSystem = this.GetComponentInChildren<ParticleSystem>();
+        _soundManager = FindObjectOfType<SoundManager>();
         this._transformComponent = this.transform;
     }
 
@@ -37,6 +38,16 @@ public class LaserSourceController : MonoBehaviour
             GameObject firstLaser = new GameObject(this.name + "LaserBeam");
             Laser laserComponent = firstLaser.AddComponent<Laser>();
             laserComponent.InitLaser(_transformComponent.position, _transformComponent.right, material, this.isDeadly, this);
+            if (_soundManager)
+            {
+                _soundManager.PlaySound("Laser");
+            }
+            
+            
+        }
+        else
+        {
+            _soundManager.PauseSound("Laser");
         }
         
         
@@ -90,5 +101,7 @@ public class LaserSourceController : MonoBehaviour
     public void ResetLaser(GameObject laser) {
         laserPool.ResetLaser(laser);
     }
+    
+    
 }
 
