@@ -6022,7 +6022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.100000024
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7516,7 +7516,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2074041, y: -3.1648412, z: -5.891481}
+  m_LocalPosition: {x: -1.2027426, y: -3.1648412, z: -5.891481}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13166,7 +13166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.100000024
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15409,7 +15409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.100000024
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22542,7 +22542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.100000024
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf513ac8e1f37434ca94b2ab5a994da6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -28428,6 +28428,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2544245150613246780, guid: ebad2d84b11090f45a9497a5cbd0fd8f, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 620390477}
+    - target: {fileID: 2544245150613246780, guid: ebad2d84b11090f45a9497a5cbd0fd8f, type: 3}
+      propertyPath: receiveDeadlyLaser
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2772742018804252437, guid: ebad2d84b11090f45a9497a5cbd0fd8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.905724
@@ -28480,6 +28488,10 @@ PrefabInstance:
       propertyPath: fromGameObject
       value: 
       objectReference: {fileID: 775151483}
+    - target: {fileID: 5138894677696808855, guid: ebad2d84b11090f45a9497a5cbd0fd8f, type: 3}
+      propertyPath: cableContainer
+      value: 
+      objectReference: {fileID: 1800775972}
     - target: {fileID: 5294643529902228657, guid: ebad2d84b11090f45a9497a5cbd0fd8f, type: 3}
       propertyPath: cableContainer
       value: 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 using UnityEngine.UI;
@@ -14,18 +15,19 @@ public class Menu : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropdownGraphics;
     [SerializeField] private Toggle toggleFullscreen;
     [SerializeField] private GameObject controlsMenu;
+    private PostProcessVolume ppVolume;
     
     
     void Start()
     {
+        ppVolume = Camera.main.gameObject.GetComponent<PostProcessVolume>();
+        ppVolume.enabled = false;
         Destroy (GameObject.Find("SoundManager"));
         Destroy (GameObject.Find("PauseMenu"));
         settingsMenu.SetActive(false);
         InitResolutionDropdown();
         toggleFullscreen.isOn = Screen.fullScreen;
 
-        // TODO ALLES MIT AUDIO WOMÖGLICH LIEBER IN SOUND SCRIPT EINFÜGEN 
-        
         dropdownGraphics.SetValueWithoutNotify(PlayerPrefs.GetInt("masterGraphics", 1));
         dropdownResolutions.SetValueWithoutNotify(PlayerPrefs.GetInt("masterResolution", dropdownResolutions.options.Count));
 
@@ -40,12 +42,14 @@ public class Menu : MonoBehaviour
     {
         settingsMenu.SetActive(true);
         mainMenu.SetActive(false);
+        ppVolume.enabled = true;
     }
 
     public void CloseSettings()
     {
         settingsMenu.SetActive(false);
         mainMenu.SetActive(true);
+        ppVolume.enabled = false;
     }
 
     public void CloseControls()

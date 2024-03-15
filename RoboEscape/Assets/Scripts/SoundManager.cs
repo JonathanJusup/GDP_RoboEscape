@@ -14,7 +14,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private TMP_Text audioTextMusic;
     [SerializeField] private Slider audioSliderSFX;
     [SerializeField] private TMP_Text audioTextSFX;
-    public AudioMixerGroup audioMixerG;
 
     private Sound BGM;
     void Awake()
@@ -49,7 +48,21 @@ public class SoundManager : MonoBehaviour
     public void PlaySound(string name)
     {
       Sound sound = Array.Find(sounds, sound => sound.name == name);
-      sound.source.Play();
+      if (!sound.source.isPlaying)
+      {
+          sound.source.Play();
+      }
+      
+    }
+
+    public void PauseSound(string name)
+    {
+        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        if (sound.source.isPlaying)
+        {
+            sound.source.Pause();
+        }
+        
     }
     
     public void SetMusicVolume(float volume)

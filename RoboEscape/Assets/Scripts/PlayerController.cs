@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
-        _soundManager = this.GetComponent<SoundManager>();
+        _soundManager = FindObjectOfType<SoundManager>();
         _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
 
         isAlive = true;
