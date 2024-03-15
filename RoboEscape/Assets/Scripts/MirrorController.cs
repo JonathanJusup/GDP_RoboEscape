@@ -77,16 +77,16 @@ public class MirrorController : MonoBehaviour {
         if (leftTrigger && rightTrigger) {
             //If both triggers are assigned
 
-            if (leftTrigger.isPressed && !rightTrigger.isPressed) {
+            if (leftTrigger.isActivated && !rightTrigger.isActivated) {
                 //Rotate CounterClockwise
                 rotationFactor = 1.0f;
             }
-            else if (!leftTrigger.isPressed && rightTrigger.isPressed) {
+            else if (!leftTrigger.isActivated && rightTrigger.isActivated) {
                 //Rotate Clockwise
                 rotationFactor = -1.0f;
             }
             
-            if (leftTrigger.isPressed && rightTrigger.isPressed) {
+            if (leftTrigger.isActivated && rightTrigger.isActivated) {
                 _animator.SetBool("IsBlocked", true);
                 _particleSystem.Play();
             }
@@ -95,11 +95,11 @@ public class MirrorController : MonoBehaviour {
                 _particleSystem.Stop();
             }
         }
-        else if (leftTrigger && leftTrigger.isPressed) {
+        else if (leftTrigger && leftTrigger.isActivated) {
             //If only left trigger is assigned and pressed
             rotationFactor = 1.0f;
         }
-        else if (rightTrigger && rightTrigger.isPressed) {
+        else if (rightTrigger && rightTrigger.isActivated) {
             //If only right trigger is assigned and pressed
             rotationFactor = -1.0f;
         }

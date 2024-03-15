@@ -13,6 +13,10 @@ public class CableController : MonoBehaviour {
     
     // Start is called before the first frame update
     void Start() {
+        if (!cableContainer) {
+            return;
+        }
+        
         int numCableSegments = cableContainer.transform.childCount;
         cableSegments = new MeshRenderer[numCableSegments];
 
@@ -24,6 +28,10 @@ public class CableController : MonoBehaviour {
 
     public void UpdateState(bool state) {
         this.state = state;
+        
+        if (!cableContainer) {
+            return;
+        }
 
         foreach (MeshRenderer cableSegment in cableSegments) {
             cableSegment.material.color = this.state ? colorOn : colorOff;

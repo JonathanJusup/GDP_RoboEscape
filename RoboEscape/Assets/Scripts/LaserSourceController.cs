@@ -12,6 +12,7 @@ public class LaserSourceController : MonoBehaviour
     [SerializeField] private bool isDeadly = false;
     
     private bool _isActive = true;
+    
     private ParticleSystem _particleSystem;
     private Transform _transformComponent;
     
@@ -27,7 +28,7 @@ public class LaserSourceController : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if (trigger) {
-            _isActive = trigger.isPressed;
+            _isActive = trigger.isActivated;
             pointLight.enabled = _isActive;
         }
 
