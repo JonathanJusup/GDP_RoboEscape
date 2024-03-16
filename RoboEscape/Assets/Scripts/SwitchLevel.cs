@@ -34,6 +34,13 @@ public class SwitchLevel : MonoBehaviour
                 SceneManager.LoadScene(3);
             }
             
+            // Check if the '4' key is pressed
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                // Load or switch to level 4
+                SceneManager.LoadScene(4);
+            }
+            
             // Check if the '0' key is pressed
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
