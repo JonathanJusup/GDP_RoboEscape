@@ -115,7 +115,9 @@ public class PlayerController : MonoBehaviour {
             isGrounded = false;
 
             animator.SetTrigger("JumpTrigger");
-            _soundManager.PlaySound("Jump");
+            if (_soundManager) {
+                _soundManager.PlaySound("Jump");
+            }
         }
     }
     
@@ -124,16 +126,21 @@ public class PlayerController : MonoBehaviour {
             return;
         }
         
-        Debug.Log("PLAYER DEATH");
         isAlive = false;
-        
         animator.SetTrigger("DeathTrigger");
         
         //player.SetActive(false);
         Vector3 playerPos = transform.position;
         _robotPartsSpawner.SpawnParts(playerPos);
         StartCoroutine(ResetAfterDelay());
-        _soundManager.PlaySound("PlayerDeath");
+        if (_soundManager) {
+            _soundManager.PlaySound("PlayerDeath");
+        }
+
+        //Deactivate all children to make them invisible
+        foreach (Transform child in this.transform) {
+            child.gameObject.SetActive(false);
+        }
     }
 
     public void SetIsGrounded(bool isGround) {

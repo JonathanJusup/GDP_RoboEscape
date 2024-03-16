@@ -1,38 +1,26 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-using UnityEngine.Serialization;
 
-public class SwitchController : Trigger {
-
-    
-    
+public class SwitchController : TriggerInterface {
     [SerializeField] private float initTimer = 1.0f;
-    private float m_CurrentTimer;
+    private float _currentTimer;
     [SerializeField] private Door door;
-    private CableController _cableController;
 
     public bool receiveDeadlyLaser;
     [SerializeField] private Material bodyMaterial;
     [SerializeField] private Material greenMaterial;
     [SerializeField] private Material redMaterial;
     [SerializeField] private Light pointLight;
-    private SoundManager _soundManager;
-    
-    
-    
+
     // Start is called before the first frame update
     void Start() {
-        m_CurrentTimer = initTimer;
-        _cableController = this.GetComponent<CableController>();
-        
-        //TODO: Fix this somehow
-        //gameObject.GetComponentInChildren<MeshRenderer>().materials[1] = (receiveDeadlyLaser ? redMaterial : greenMaterial);
-        gameObject.GetComponentInChildren<MeshRenderer>().SetMaterials(new List<Material>() {bodyMaterial, (receiveDeadlyLaser ? redMaterial : greenMaterial)});
-        this._soundManager = FindObjectOfType<SoundManager>();
+        CableController = GetComponent<CableController>();
+        gameObject.GetComponentInChildren<MeshRenderer>().SetMaterials(new List<Material>()
+            { bodyMaterial, (receiveDeadlyLaser ? redMaterial : greenMaterial) });
+        SoundManager = FindObjectOfType<SoundManager>();
 
-        this.pointLight.color = receiveDeadlyLaser ? redMaterial.color : greenMaterial.color;
+        _currentTimer = initTimer;
+        pointLight.color = receiveDeadlyLaser ? redMaterial.color : greenMaterial.color;
     }
 
     // Update is called once per frame
@@ -46,50 +34,53 @@ public class SwitchController : Trigger {
         if (door) {
             initialDoorState = door.GetIsOpen();
         }
-        
-        
+
+
         if (isActivated) {
-            m_CurrentTimer -= Time.deltaTime;
-            if (m_CurrentTimer <= 0.0f) {
-                mIsActivated = false;
+            _currentTimer -= Time.deltaTime;
+            if (_currentTimer <= 0.0f) {
+                isActivated = false;
+            } else {
+                UpdateDoorState(true);
+                CableController.UpdateState(isActivated);
             }
-            else {
-                if (door) {
-                    door.Open();
-                }
-                _cableController.UpdateState(mIsActivated);
-            }
-        }
-        else {
-            m_CurrentTimer = initTimer;
-            if (door) {
-                door.Close();
-            }
-            _cableController.UpdateState(mIsActivated);
+        } else {
+            _currentTimer = initTimer;
+            UpdateDoorState(false);
+            CableController.UpdateState(isActivated);
         }
 
         if (door && door.GetIsOpen() != initialDoorState) {
-            _soundManager.PlaySound("Door");
+            if (SoundManager) {
+                SoundManager.PlaySound("Door");
+            }
         }
-        
-        
     }
 
     private void UpdatePointLightState() {
-        if (mIsActivated) {
+        if (isActivated) {
             if (!pointLight.enabled) {
                 pointLight.enabled = true;
             }
-        }
-        else {
+        } else {
             if (pointLight.enabled) {
                 pointLight.enabled = false;
             }
         }
     }
 
+    private void UpdateDoorState(bool open) {
+        if (door) {
+            if (open) {
+                door.Open();
+            } else {
+                door.Close();
+            }
+        }
+    }
+
     public void ActivateSwitch() {
-        mIsActivated = true;
-        m_CurrentTimer = initTimer;
+        isActivated = true;
+        _currentTimer = initTimer;
     }
 }

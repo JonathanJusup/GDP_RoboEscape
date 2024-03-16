@@ -4,85 +4,60 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class LaserSourceController : MonoBehaviour
-{
+public class LaserSourceController : MonoBehaviour {
     public Material material;
 
-    [SerializeField] private Trigger trigger;
+    [SerializeField] private TriggerInterface trigger;
     [SerializeField] private bool isDeadly = false;
-    
+
     private bool _isActive = true;
-    
+
     private ParticleSystem _particleSystem;
-    private Transform _transformComponent;
+    private Transform _transform;
     private SoundManager _soundManager;
     [SerializeField] private Light pointLight;
-    [SerializeField] private LaserPool laserPool;
     [SerializeField] private Transform laserContainer;
 
     private void Start() {
         _particleSystem = this.GetComponentInChildren<ParticleSystem>();
         _soundManager = FindObjectOfType<SoundManager>();
-        this._transformComponent = this.transform;
+        this._transform = this.transform;
     }
 
     // Update is called once per frame
     void Update() {
         if (trigger) {
-            _isActive = trigger.isActivated;
+            _isActive = trigger.getIsActivated;
             pointLight.enabled = _isActive;
         }
 
+
+        //Destroy(GameObject.Find(this.name + "LaserBeam"));
+        foreach (Transform child in laserContainer) {
+            Destroy(child.gameObject);
+        }
         
-        Destroy(GameObject.Find(this.name + "LaserBeam"));
         if (this._isActive) {
             GameObject firstLaser = new GameObject(this.name + "LaserBeam");
             Laser laserComponent = firstLaser.AddComponent<Laser>();
-            laserComponent.InitLaser(_transformComponent.position, _transformComponent.right, material, this.isDeadly, this);
-            if (_soundManager)
-            {
+            laserComponent.InitLaser(_transform.position, _transform.right, laserContainer, material, this.isDeadly, this);
+            
+            if (_soundManager) {
                 _soundManager.PlaySound("Laser");
             }
-            
-            
         }
-        else
-        {
-            _soundManager.PauseSound("Laser");
-        }
-        
-        
-        
-        /*
-        Reset();
-        if (this.isActive) {
-            GameObject initialLaser = _laserPool.GetLaser();
-            if (!initialLaser) {
-                return;
+        else {
+            if (_soundManager) {
+                _soundManager.PauseSound("Laser");
             }
-            initialLaser.SetActive(true);
-            
-            initialLaser.transform.parent = _laserContainer;
-            LaserBehaviour laserBehaviour = initialLaser.GetComponent<LaserBehaviour>();
-            
-            laserBehaviour.InitLaser(transformComponent.position, transformComponent.right, this.isDeadly, this);
         }
-        */
-        
 
-        
         //Handle ParticleSystem
         if (_isActive && !_particleSystem.isPlaying) {
             _particleSystem.Play();
-        } else if (!_isActive && _particleSystem.isPlaying) {
-            _particleSystem.Stop();
         }
-    }
-
-    public void Reset() {
-        foreach (Transform child in laserContainer) {
-            Destroy(child.gameObject);
-            //_laserPool.ResetLaser(child.gameObject);
+        else if (!_isActive && _particleSystem.isPlaying) {
+            _particleSystem.Stop();
         }
     }
 
@@ -94,15 +69,4 @@ public class LaserSourceController : MonoBehaviour
         pointLight.transform.position = position;
         pointLight.color = color;
     }
-
-    public GameObject GetLaser() {
-        return laserPool.GetLaser();
-    }
-
-    public void ResetLaser(GameObject laser) {
-        laserPool.ResetLaser(laser);
-    }
-    
-    
 }
-

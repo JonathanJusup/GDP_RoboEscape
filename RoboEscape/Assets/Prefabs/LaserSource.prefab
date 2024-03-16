@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1764160512252836235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7554302401191199025}
-  - component: {fileID: 3610826472788006477}
-  m_Layer: 0
-  m_Name: LaserPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7554302401191199025
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764160512252836235}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7974416827484498233}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3610826472788006477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764160512252836235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38e70a89a1327746af08bda6ade55d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _laser: {fileID: 1046366390990674633, guid: d8e98d47c4b64d24f92de84d7364f4f6, type: 3}
-  _size: 10
 --- !u!1 &1785739039781436865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5030,9 +4984,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3882415271307395185}
   - {fileID: 8200759421434117632}
-  - {fileID: 7554302401191199025}
   - {fileID: 3849377675969488838}
   - {fileID: 2691148576089940422}
   m_Father: {fileID: 0}
@@ -5053,8 +5005,7 @@ MonoBehaviour:
   trigger: {fileID: 0}
   isDeadly: 0
   pointLight: {fileID: 4731224952785128390}
-  laserPool: {fileID: 0}
-  laserContainer: {fileID: 0}
+  laserContainer: {fileID: 3849377675969488838}
 --- !u!1001 &2509164847013217837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5116,70 +5067,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd907bac6d94e13419db5b8ef7b3d6ac, type: 3}
   m_PrefabInstance: {fileID: 2509164847013217837}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3633179373091760026
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7974416827484498233}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6532819
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.2705978
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.27059796
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.6532813
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -45
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_Name
-      value: laser_model
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
---- !u!4 &3882415271307395185 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 40420974215e7de44996c13205eb8cb3, type: 3}
-  m_PrefabInstance: {fileID: 3633179373091760026}
   m_PrefabAsset: {fileID: 0}

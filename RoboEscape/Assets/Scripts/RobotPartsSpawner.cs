@@ -28,7 +28,7 @@ public class RobotPartsSpawner : MonoBehaviour
             Rigidbody rb = scrap.GetComponent<Rigidbody>();
             Vector3 direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized;
             rb.AddForce(direction * force, ForceMode.Impulse);
-            rb.AddTorque(new Vector3(0, 0, Random.Range(0.0f, 360.0f)), ForceMode.Impulse);
+            rb.AddTorque(new Vector3(0, 0, Random.Range(-0.5f, 0.5f)), ForceMode.Impulse);
         }
     }
     

@@ -17,11 +17,12 @@ public class Laser : MonoBehaviour
    
 
 
-    public void InitLaser(Vector3 position, Vector3 direction, Material material, bool isDeadly, LaserSourceController sourceController)
+    public void InitLaser(Vector3 position, Vector3 direction, Transform parent, Material material, bool isDeadly, LaserSourceController sourceController)
     {
         
         this.pos = position;
         this.dir = direction;
+        this.transform.parent = parent;
         this.mat = material;
         this.isDeadly = isDeadly;
         this.sourceController = sourceController;
@@ -132,7 +133,7 @@ public class Laser : MonoBehaviour
 
         //Add laser component with new position, direction and otherwise same attributes 
         Laser reflectionLaserComponent = reflection.AddComponent<Laser>();
-        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, mat, isDeadly, sourceController);
+        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, this.transform, mat, isDeadly, sourceController);
     }
 
     /**
@@ -153,6 +154,6 @@ public class Laser : MonoBehaviour
 
         //Add laser component with new position, direction, isDeadlyFlag and otherwise same attributes 
         Laser reflectionLaserComponent = reflection.AddComponent<Laser>();
-        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, mat, isDeadly, sourceController);
+        reflectionLaserComponent.InitLaser(reflection.transform.position, reflection.transform.right, this.transform, mat, isDeadly, sourceController);
     }
 }

@@ -1,61 +1,53 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class Trigger : MonoBehaviour
-{
-    //public GameObject toggleableObject;
-    [SerializeField] protected bool mIsActivated;
+public class Trigger : TriggerInterface {
     [SerializeField] private Animator animator;
-    private CableController _cableController;
-    private SoundManager _soundManager;
     
-    public bool isActivated => mIsActivated;
-
     private void Start() {
-        _soundManager = GameObject.FindObjectOfType<SoundManager>();
-        _cableController = this.GetComponent<CableController>();
+        SoundManager = FindObjectOfType<SoundManager>();
+        CableController = GetComponent<CableController>();
     }
     
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isActivated)
+        {
+            isActivated = true;
+            CableController.UpdateState(isActivated);
+            animator.ResetTrigger("Up");
+            animator.SetTrigger("Down");
+            //Debug.Log("BUTTON DOWN");
+            
+            if (SoundManager) {
+                SoundManager.PlaySound("Button");
+            }
+        }
+    }
     
     private void OnTriggerStay(Collider other)
     {
-        if (!mIsActivated)
+        if (!isActivated)
         {
-            
-            mIsActivated = true;
-            _cableController.UpdateState(mIsActivated);
+            isActivated = true;
+            CableController.UpdateState(isActivated);
             animator.ResetTrigger("Up");
             animator.SetTrigger("Down");
-            Debug.Log("BUTTON STAY");
+            //Debug.Log("BUTTON STAY");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (mIsActivated)
+        if (isActivated)
         {
-            mIsActivated = false;
-            _cableController.UpdateState(mIsActivated);
+            isActivated = false;
+            CableController.UpdateState(isActivated);
         }
         animator.ResetTrigger("Down");
         animator.SetTrigger("Up");
-        Debug.Log("BUTTON UP");
+        //Debug.Log("BUTTON UP");
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!mIsActivated)
-        {
-            _soundManager.PlaySound("Button");
-        }
-        animator.ResetTrigger("Up");
-        animator.SetTrigger("Down");
-        Debug.Log("BUTTON DOWN");
 
-    }
 }

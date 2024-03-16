@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CableController : MonoBehaviour {
 
@@ -8,8 +9,8 @@ public class CableController : MonoBehaviour {
     private MeshRenderer[] cableSegments;
     private bool state = false;
     
-    [SerializeField] private Color colorOff = Color.black;
-    [SerializeField] private Color colorOn = Color.cyan;
+    [SerializeField] private Color colorInactive = Color.black;
+    [SerializeField] private Color colorActive = Color.cyan;
     
     // Start is called before the first frame update
     void Start() {
@@ -22,19 +23,26 @@ public class CableController : MonoBehaviour {
 
         for (int i = 0; i < numCableSegments; i++) {
             cableSegments[i] = cableContainer.transform.GetChild(i).gameObject.GetComponent<MeshRenderer>();
-            cableSegments[i].material.color = colorOff;
+            cableSegments[i].material.color = colorInactive;
         }
     }
 
+    /// <summary>
+    /// Updates state and changes all cable materials based on that state.
+    /// Returns early, if no state change occured
+    /// </summary>
+    /// <param name="state">New state</param>
     public void UpdateState(bool state) {
-        this.state = state;
-        
-        if (!cableContainer) {
+        bool stateHasChanged = this.state != state;
+        if (!cableContainer || !stateHasChanged) {
             return;
         }
-
+        
+        this.state = state;
+        
+        //Change cable materials based on curren state
         foreach (MeshRenderer cableSegment in cableSegments) {
-            cableSegment.material.color = this.state ? colorOn : colorOff;
+            cableSegment.material.color = this.state ? colorActive : colorInactive;
         }
     }
 }
