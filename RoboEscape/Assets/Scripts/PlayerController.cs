@@ -105,6 +105,11 @@ public class PlayerController : MonoBehaviour {
     
     void Jump() {
         if (Input.GetButtonDown("Jump") && isGrounded) {
+            animator.SetTrigger("JumpTrigger");
+            if (_soundManager)
+            {
+                _soundManager.PlaySound("Jump");
+            }
             //Reset y-velocity before jumping
             Vector3 velocity = rb.velocity;
             velocity = new Vector3(velocity.x, 0.0f, velocity.z);
@@ -114,10 +119,7 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.up * jumpPower; 
             isGrounded = false;
 
-            animator.SetTrigger("JumpTrigger");
-            if (_soundManager) {
-                _soundManager.PlaySound("Jump");
-            }
+            
         }
     }
     
