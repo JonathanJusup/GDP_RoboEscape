@@ -15,13 +15,10 @@ public class Menu : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropdownGraphics;
     [SerializeField] private Toggle toggleFullscreen;
     [SerializeField] private GameObject controlsMenu;
-    private PostProcessVolume ppVolume;
     
     
     void Start()
     {
-        ppVolume = Camera.main.gameObject.GetComponent<PostProcessVolume>();
-        ppVolume.enabled = false;
         Destroy (GameObject.Find("SoundManager"));
         Destroy (GameObject.Find("PauseMenu"));
         settingsMenu.SetActive(false);
@@ -35,21 +32,19 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void OpenSettings()
     {
         settingsMenu.SetActive(true);
         mainMenu.SetActive(false);
-        ppVolume.enabled = true;
     }
 
     public void CloseSettings()
     {
         settingsMenu.SetActive(false);
         mainMenu.SetActive(true);
-        ppVolume.enabled = false;
     }
 
     public void CloseControls()

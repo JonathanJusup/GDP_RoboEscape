@@ -56,7 +56,8 @@ public class Laser : MonoBehaviour
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
         
-        if (Physics.Raycast(ray, out hit, 100))
+        int layerMask =~ LayerMask.NameToLayer("Ignore Raycast");
+        if (Physics.Raycast(ray, out hit, 100, layerMask))
         {
             ProcessHit(hit);
         }
