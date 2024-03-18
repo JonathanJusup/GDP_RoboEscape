@@ -3,23 +3,53 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/**
+ * Class that controls how the player moves and behaves in certain situations (i.e. dying, jumping)
+ *
+ * @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707), Prince Lare-Lantone (cgt104645)
+ */
 public class PlayerController : MonoBehaviour {
+    
+    /** The speed of the player */
     public float speed = 5.0f;
+    
+    /** The force how strong the player jumps off the ground */
     public float jumpPower = 5.0f;
+    
+    /** Flag that states if the player is on the ground or not */
     public bool isGrounded = true;
+    
+    /** Flag that states if the player is alive or not */
     public bool isAlive = true;
+    
+    /** The horizontal movement of the player */
     private float horizontalMovement;
+    
+    /** The Rigidbody component of the player */
     private Rigidbody rb;
+    
+    /** animator of the player */
     Animator animator;
+    
+    /** The soundmanager for SFX (i.e. jumping) */
     private SoundManager _soundManager;
+    
+    /** Spawner for individual parts of the robot model */
     private RobotPartsSpawner _robotPartsSpawner;
     
+    /** Value that decides how fast the player is falling to the ground */
     public float fallMultiplier = 2.5f;
+    
+    /** Keeps the gravity at a lower level when the player is jumping */
     public float lowJumpMultiplier = 2.0f;
 
+    /** Flag for deciding if a player is moving or not */
     private bool _isMoving = false;
+    
+    /** Flag for deciding if a player is running or not */
     private bool _isRunning = false;
 
+    
     public bool IsMoving {
         get { return _isMoving; }
         private set {
@@ -36,7 +66,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    // Start is called before the first frame update
+    /**
+     * Method is called before the first frame update.
+     * Sets relevant components for the player such as the robotPartsSpawner
+     */
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
@@ -46,12 +79,18 @@ public class PlayerController : MonoBehaviour {
         isAlive = true;
     }
 
-    // Update is called once per frame
+    /**
+     * Method is called once per frame.
+     * Checks for certain states in the game and allows the player to move the model.
+     */
     void Update() {
+        
+        // Disabling controls when game is paused
         if (PauseMenuController.IsPaused) {
             return;
         }
 
+        // Setting the velocity to zero if player is dead and disabling controls
         if (!this.isAlive) {
             rb.velocity = Vector3.zero;
             return;
@@ -69,25 +108,12 @@ public class PlayerController : MonoBehaviour {
             rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
         }
     }
-
-
-    /*
-    private void FixedUpdate() {
-        //transform.Translate(Vector3.forward * Time.deltaTime * speed * horizontalMovement);
-
-        // Check if the player is moving to the left and flip the character
-        if (horizontalMovement < 0) {
-            transform.Translate(Vector3.back * Time.deltaTime * speed * horizontalMovement);
-            transform.rotation = Quaternion.Euler(0f, 270f, 0f);
-        }
-        // Check if the player is moving to the right and flip the character back
-        else if (horizontalMovement > 0) {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed * horizontalMovement);
-            transform.rotation = transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        }
-    }
-    */
     
+    
+    /**
+     * Handles the horizontal movement of the player. Rotates the player model in the correct position depending on
+     * in which direction the player moves.
+     */
     void Move() {
         float horizontalMovement = Input.GetAxis("Horizontal");
         IsMoving = Mathf.Abs(horizontalMovement) > 0.1f;
@@ -95,7 +121,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(horizontalMovement, 0.0f, 0.0f);
         rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, 0.0f);
         
-        //Rotate player accoring to movement direction
+        //Rotate player according to movement direction
         if (horizontalMovement < 0) {
             transform.rotation = Quaternion.Euler(0f, 270f, 0f);
         } else if (horizontalMovement > 0) {
@@ -103,6 +129,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
     
+    /**
+     * Handles the vertical movement of the player. Executes the jumping animation.
+     */
     void Jump() {
         if (Input.GetButtonDown("Jump") && isGrounded) {
             animator.SetTrigger("JumpTrigger");
@@ -123,6 +152,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
     
+    /**
+     * Handles the event in which the player dies. Executes
+     */
     public void Die() {
         if (!isAlive) {
             return;
@@ -131,13 +163,15 @@ public class PlayerController : MonoBehaviour {
         isAlive = false;
         animator.SetTrigger("DeathTrigger");
         
-        //player.SetActive(false);
         Vector3 playerPos = transform.position;
+        // Spawing individual parts of the robot
         _robotPartsSpawner.SpawnParts(playerPos);
-        StartCoroutine(ResetAfterDelay());
         if (_soundManager) {
             _soundManager.PlaySound("PlayerDeath");
         }
+        // Resetting the level after a delay
+        StartCoroutine(ResetAfterDelay());
+        
 
         //Deactivate all children to make them invisible
         foreach (Transform child in this.transform) {
@@ -145,10 +179,18 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /**
+     * Sets a flag to decide if the player is currently touching the floor or not.
+     *
+     * @param isGround Flag that decides if the player is currently on the ground or not.
+     */
     public void SetIsGrounded(bool isGround) {
         isGrounded = isGround;
     }
     
+    /**
+     * Resets the level three seconds after the player dies.
+     */
     private IEnumerator ResetAfterDelay()
     {
         Debug.Log("Reset in 3 Seconds");

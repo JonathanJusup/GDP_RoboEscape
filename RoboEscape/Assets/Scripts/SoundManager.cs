@@ -2,21 +2,46 @@ using System;
 using TMPro;
 using UnityEngine.Audio;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+/**
+ * Class for managing all sounds that get used in the game.
+ * Allows playing a specific sound or pausing it. Also gives the possibility to change the
+ * volume of the sounds.
+ *
+ * @authors Florian Kern (cgt104661)
+ */
 public class SoundManager : MonoBehaviour
 {
+    /** Sound-array for all used sounds */
     public Sound[] sounds;
+    
+    /** Audiomixer for the music */
     [SerializeField] private AudioMixer audioMixerMusic;
+    
+    /** Audiomixer for the SFX */
     [SerializeField] private AudioMixer audioMixerSfx;
     
+    /** Slider for the music */
     [SerializeField] private Slider audioSliderMusic;
-    [SerializeField] private TMP_Text audioTextMusic;
-    [SerializeField] private Slider audioSliderSfx;
-    [SerializeField] private TMP_Text audioTextSfx;
-    private Sound _backgroundMusic;
     
+    /** Text for the slider of the music */
+    [SerializeField] private TMP_Text audioTextMusic;
+    
+    /** Slider for the SFX */
+    [SerializeField] private Slider audioSliderSfx;
+    
+    /** Text for the slider of the SFX */
+    [SerializeField] private TMP_Text audioTextSfx;
+    
+  
+    
+    
+    
+    /**
+     * Gets called when the script instance is being loaded.
+     * Initializes all sounds.
+     */
     void Awake()
     {
         foreach (Sound sound in sounds)
@@ -24,65 +49,96 @@ public class SoundManager : MonoBehaviour
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.audioClip;
             sound.source.outputAudioMixerGroup = sound.audioMixer;
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
         }
-        _backgroundMusic = Array.Find(sounds, sound => sound.name == "BackgroundMusic");
     }
 
+    /**
+     * Method is called before the first frame update.
+     * Sets the slider values for the music and SFX and sets the volume of the music.
+     */
     private void Start()
     {
         audioSliderMusic.SetValueWithoutNotify(PlayerPrefs.GetFloat("masterVolume", 0.3f));
         audioTextMusic.text = (audioSliderMusic.value * 100.0f).ToString("0") + "%";
         audioSliderSfx.SetValueWithoutNotify(PlayerPrefs.GetFloat("masterSFX", 0.3f));
         audioTextSfx.text = (audioSliderSfx.value * 100.0f).ToString("0") + "%";
-        audioMixerMusic.SetFloat("volume",PlayerPrefs.GetFloat("masterVolume", 0.5f));
-        audioMixerSfx.SetFloat("volume",PlayerPrefs.GetFloat("masterSFX", 0.5f));
-        _backgroundMusic.source.volume = PlayerPrefs.GetFloat("masterVolume", 0.5f);
-        Debug.Log("PLAY BGM");
+        audioMixerMusic.SetFloat("volume",Mathf.Log10(PlayerPrefs.GetFloat("masterVolume", 0.5f)) * 20);
+        audioMixerSfx.SetFloat("volume",Mathf.Log10(PlayerPrefs.GetFloat("masterSFX", 0.3f)) * 20);
         PlaySound("BackgroundMusic");
 
         DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    public void PlaySound(string name)
+    /**
+     * Plays a sound.
+     *
+     * @param soundName The sound that gets played.
+     */
+    public void PlaySound(string soundName)
     {
-      Sound sound = Array.Find(sounds, sound => sound.name == name);
-      if (!sound.source.isPlaying)
-      {
-          sound.source.Play();
-      }
+        // Finding the sound.
+        Sound sound = Array.Find(sounds, sound => sound.name == soundName);
+        if (!sound.source.isPlaying)
+        {
+           sound.source.Play();
+        }
       
     }
 
-    public void PauseSound(string name)
+    /**
+     * Pauses a currently playing sound.
+     *
+     * @param soundName The sound that gets paused
+     */
+    public void PauseSound(string soundName)
     {
-        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        // Find the wanted sound
+        Sound sound = Array.Find(sounds, sound => sound.name == soundName);
         if (sound.source.isPlaying)
         {
+            // Pausing the sound
             sound.source.Pause();
         }
         
     }
     
+    /**
+     * Gets called when the slider value for the volume of the music gets changed.
+     * Sets the volume for the music.
+     *
+     * @param volume The volume for the music.
+     */
     public void SetMusicVolume(float volume)
     {
         audioTextMusic.text = (volume * 100.0f).ToString("0") + "%";
+        // Audiomixer volume changes logarithmically, slider values change linearly
         audioMixerMusic.SetFloat("volume", Mathf.Log10(volume) * 20);
+        
+        // Setting playerprefs for the music with the chosen volume
         PlayerPrefs.SetFloat("masterVolume", volume);
-        _backgroundMusic.source.volume = audioSliderMusic.value;
-        Debug.Log("CHANGING VOL MUSIC");
+        
+        //_backgroundMusic.source.volume = audioSliderMusic.value;
+
         PlayerPrefs.Save();
     }
     
+    /**
+     * Gets called when the slider value for the volume of the special effects gets changed.
+     * Sets the volume for the special effects.
+     *
+     * @param volume The volume for the special effects.
+     */
     public void SetSFXVolume(float volume)
     {
         audioTextSfx.text = (volume * 100.0f).ToString("0") + "%";
+        // Audiomixer volume changes logarithmically, slider values change linearly
         audioMixerSfx.SetFloat("volume", Mathf.Log10(volume) * 20);
+        
+        // Setting playerprefs for the special effects with the chosen volume
         PlayerPrefs.SetFloat("masterSFX", volume);
-        Debug.Log("CHANGING VOL SFX");
+        
+        // Saving playerprefs
         PlayerPrefs.Save();
     }
 }
