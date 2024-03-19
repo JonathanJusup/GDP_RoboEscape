@@ -17,6 +17,25 @@ public class PauseMenuController : MonoBehaviour
     
     /** Flag that indicates if the game is currently paused or not */
     public static bool IsPaused;
+    
+    
+    
+    private static PauseMenuController _instance;
+
+    
+    
+    
+    
+    
+    
+    
+    // Public property to access the singleton instance
+    public static PauseMenuController Instance
+    {
+        get { return _instance; }
+    }
+    
+    
     /**
      * Method is called before the first frame update.
      * Deactivates the windows for the pause menu and the controls and
@@ -27,7 +46,19 @@ public class PauseMenuController : MonoBehaviour
         pauseMenu.SetActive(false);
         controls.SetActive(false);
         IsPaused = false;
-        DontDestroyOnLoad(this);
+        // If the instance doesn't already exist, set it to this object
+        if (_instance == null)
+        {
+            _instance = this;
+            // Make the object persistent across scenes
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists, destroy this object
+            Destroy(gameObject);
+        }
+
     }
 
     /**
@@ -100,6 +131,8 @@ public class PauseMenuController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         IsPaused = false;
         Time.timeScale = 1.0f;
+        pauseMenu.SetActive(false);
+        controls.SetActive(false);
     }
 
     /**
