@@ -8,50 +8,39 @@ using UnityEngine.SceneManagement;
  *
  * @author Florian Kern (cgt104661)
  */
-public class ExitLevel : MonoBehaviour
-{
+public class ExitLevel : MonoBehaviour {
     /** Transition animation */
     [SerializeField] private Animator transitionAnim;
-    
+
     /** Duration of the transition */
     [SerializeField] private float transitionTime = 1f;
 
     /**
-     * Gets called when an object enters the area behind a door that leads to the next level. 
+     * Gets called when an object enters the area behind a door that leads to the next level.
      */
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            LoadNextLevel();    
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            LoadNextLevel();
         }
-        
     }
 
     /**
      * Loads the next level using a coroutine.
      */
-    private void LoadNextLevel()
-    {
+    private void LoadNextLevel() {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     /**
      * Loads a level after an animation and a fixed time.
      */
-    IEnumerator LoadLevel(int index)
-    {
+    IEnumerator LoadLevel(int index) {
         transitionAnim.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
-        if (index == SceneManager.sceneCountInBuildSettings )
-        {
+        if (index == SceneManager.sceneCountInBuildSettings) {
             SceneManager.LoadScene("MenuScene");
-        }
-        else
-        {
+        } else {
             SceneManager.LoadScene(index);
         }
-        
     }
-    
 }
