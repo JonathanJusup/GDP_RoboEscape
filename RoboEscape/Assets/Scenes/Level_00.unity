@@ -11182,7 +11182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: aed2194ffb25b8a49aa6576e5f1b4361, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.25
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aed2194ffb25b8a49aa6576e5f1b4361, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17837,6 +17837,10 @@ PrefabInstance:
     - target: {fileID: 74943424692447785, guid: 97cfe687a40477741a58b8bf0cdd1d09, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 520918967038721770, guid: 97cfe687a40477741a58b8bf0cdd1d09, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 676174911513004548, guid: 97cfe687a40477741a58b8bf0cdd1d09, type: 3}
       propertyPath: m_SizeDelta.x
