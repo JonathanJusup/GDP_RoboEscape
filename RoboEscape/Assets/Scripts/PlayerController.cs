@@ -96,15 +96,10 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.zero;
             return;
         }
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
-        animator.SetBool("isGrounded", isGrounded);
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
-        {
-            animator.SetBool("isGrounded", isGrounded);
-        }
+
         Jump();
         Move();
+        CheckIsGround();
 
         //Increase Gravity when falling, keep it lower, when high jumping
         if (rb.velocity.y < 0) {
@@ -185,7 +180,7 @@ public class PlayerController : MonoBehaviour {
 
     private void CheckIsGround() {
         isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, groundCheckDistance + 0.1f);
-        //Debug.DrawRay(transform.position, Vector3.down * groundCheckDistance, Color.red);
+        Debug.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.down * (groundCheckDistance + 0.1f), Color.red);
         animator.SetBool("isGrounded", isGrounded);
     }
 
