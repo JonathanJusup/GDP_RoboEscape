@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
         {
-            Debug.Log("Raycast hit the ground at: " + hit.point + isGrounded);
             animator.SetBool("isGrounded", isGrounded);
         }
         Jump();
