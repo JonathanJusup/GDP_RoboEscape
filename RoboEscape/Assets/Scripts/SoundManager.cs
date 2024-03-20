@@ -34,10 +34,23 @@ public class SoundManager : MonoBehaviour
     /** Text for the slider of the SFX */
     [SerializeField] private TMP_Text audioTextSfx;
     
-  
+    private static SoundManager _instance;
+
     
     
     
+    
+    
+    
+    
+    // Public property to access the singleton instance
+    public static SoundManager Instance
+    {
+        get { return _instance; }
+    }
+
+
+
     /**
      * Gets called when the script instance is being loaded.
      * Initializes all sounds.
@@ -66,8 +79,19 @@ public class SoundManager : MonoBehaviour
         audioMixerMusic.SetFloat("volume",Mathf.Log10(PlayerPrefs.GetFloat("masterVolume", 0.5f)) * 20);
         audioMixerSfx.SetFloat("volume",Mathf.Log10(PlayerPrefs.GetFloat("masterSFX", 0.3f)) * 20);
         PlaySound("BackgroundMusic");
+        // If the instance doesn't already exist, set it to this object
+        if (_instance == null)
+        {
+            _instance = this;
+            // Make the object persistent across scenes
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // If an instance already exists, destroy this object
+            Destroy(gameObject);
+        }
 
-        DontDestroyOnLoad(this);
     }
 
     /**
