@@ -19872,7 +19872,23 @@ PrefabInstance:
       objectReference: {fileID: 105376849}
     - target: {fileID: 419249111582604926, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
       propertyPath: sounds.Array.data[1].volume
-      value: 0
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 419249111582604926, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
+      propertyPath: sounds.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 419249111582604926, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
+      propertyPath: sounds.Array.data[3].volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 419249111582604926, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 419249111582604926, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2687449966471877948, guid: db357b02b4f2a1c48adbee382af0352d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20448,7 +20464,7 @@ Transform:
   m_GameObject: {fileID: 1280433685}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.9306793, y: 61.858208, z: -9.245894}
+  m_LocalPosition: {x: -4.8798237, y: 61.858208, z: -9.245894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

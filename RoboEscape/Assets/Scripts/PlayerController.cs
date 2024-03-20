@@ -96,9 +96,13 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.zero;
             return;
         }
-
-
-        CheckIsGround();
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        animator.SetBool("isGrounded", isGrounded);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.1f))
+        {
+            animator.SetBool("isGrounded", isGrounded);
+        }
         Jump();
         Move();
 

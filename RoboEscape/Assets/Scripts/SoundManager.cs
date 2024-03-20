@@ -44,11 +44,7 @@ public class SoundManager : MonoBehaviour
     
     
     // Public property to access the singleton instance
-    public static SoundManager Instance
-    {
-        get { return _instance; }
-    }
-
+    public static SoundManager Instance => _instance;
 
 
     /**
@@ -61,6 +57,7 @@ public class SoundManager : MonoBehaviour
         {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.audioClip;
+            sound.source.volume = sound.volume;
             sound.source.outputAudioMixerGroup = sound.audioMixer;
             sound.source.loop = sound.loop;
         }
@@ -69,6 +66,7 @@ public class SoundManager : MonoBehaviour
     /**
      * Method is called before the first frame update.
      * Sets the slider values for the music and SFX and sets the volume of the music.
+     * Instantiates the SoundManager as a singleton.
      */
     private void Start()
     {
@@ -101,8 +99,10 @@ public class SoundManager : MonoBehaviour
      */
     public void PlaySound(string soundName)
     {
-        // Finding the sound.
+        // Finding the sound
         Sound sound = Array.Find(sounds, sound => sound.name == soundName);
+        
+        // Avoiding that a sound gets played multiple times
         if (!sound.source.isPlaying)
         {
            sound.source.Play();
@@ -142,8 +142,6 @@ public class SoundManager : MonoBehaviour
         // Setting playerprefs for the music with the chosen volume
         PlayerPrefs.SetFloat("masterVolume", volume);
         
-        //_backgroundMusic.source.volume = audioSliderMusic.value;
-
         PlayerPrefs.Save();
     }
     
