@@ -156,7 +156,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     /**
-     * Handles the event in which the player dies. Executes
+     * Handles the event in which the player dies.
+     * Executes the death animation.
      */
     public void Die() {
         if (!isAlive) {
@@ -193,7 +194,6 @@ public class PlayerController : MonoBehaviour {
      * Resets the level three seconds after the player dies.
      */
     private IEnumerator ResetAfterDelay() {
-        Debug.Log("Reset in 3 Seconds");
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
