@@ -19,7 +19,7 @@ public class Sound
     public AudioMixerGroup audioMixer;
 
     /** Volume of the sound */
-    [Range(0.1f, 1f)]
+    [Range(0.01f, 1f)]
     public float volume;
     
     /** Flag to decide whether a sound loops or not */

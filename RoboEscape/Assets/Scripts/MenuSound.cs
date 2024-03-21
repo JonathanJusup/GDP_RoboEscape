@@ -28,8 +28,6 @@ public class MenuSound : MonoBehaviour
     /** Text that indicates the current volume of the SFX corresponding to the slider of the SFX */
     [SerializeField] private TMP_Text audioTextSFX;
     
-    /** The source of the music */
-    [SerializeField] private AudioSource audioSource;
     
     
     
@@ -46,9 +44,7 @@ public class MenuSound : MonoBehaviour
         // using the values of the PlayerPrefs to set the value of the slider for the SFX or setting default value
         audioSliderSFX.SetValueWithoutNotify(PlayerPrefs.GetFloat("masterSFX", 0.3f));
         audioTextSFX.text = (audioSliderSFX.value * 100.0f).ToString("0") + "%";
-        
-        // Setting volume 
-        audioSource.volume = audioSliderMusic.value;
+        audioMixerMusic.SetFloat("volume", Mathf.Log10(PlayerPrefs.GetFloat("masterVolume", 0.3f)) * 20);
 
     }
 
@@ -67,7 +63,6 @@ public class MenuSound : MonoBehaviour
         
         // Setting the playerprefs with the chosen volume
         PlayerPrefs.SetFloat("masterVolume", volume);
-        audioSource.volume = audioSliderMusic.value;
         Debug.Log("CHANGING VOL MUSIC");
         // Saving playerprefs
         PlayerPrefs.Save();
