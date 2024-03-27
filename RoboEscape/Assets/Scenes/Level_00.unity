@@ -24355,6 +24355,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetSFXVolume
       objectReference: {fileID: 0}
+    - target: {fileID: 2571708962794089217, guid: 97cfe687a40477741a58b8bf0cdd1d09, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6302621058462726809, guid: 97cfe687a40477741a58b8bf0cdd1d09, type: 3}
       propertyPath: m_Name
       value: Text_Music
@@ -27825,7 +27829,7 @@ Transform:
   m_GameObject: {fileID: 1280433685}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.930683, y: 61.858208, z: -9.245894}
+  m_LocalPosition: {x: -4.9361496, y: 61.858208, z: -9.245894}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

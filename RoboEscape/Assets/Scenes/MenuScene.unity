@@ -11729,6 +11729,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2657034596884292453, guid: ed99b291cdb775e41a2a4cb8d80c0f48, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8653803309241671304, guid: ed99b291cdb775e41a2a4cb8d80c0f48, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -16240,7 +16244,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 280220570}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 524356884}
