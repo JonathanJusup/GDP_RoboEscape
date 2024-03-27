@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// Class for a single sound that can be used in a game.
+/// Class for a sound that can be used in a game.
 ///
 /// @author Florian Kern (cgt104661)
 /// </summary>
