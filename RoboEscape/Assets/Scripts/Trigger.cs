@@ -9,7 +9,7 @@ using UnityEngine;
 public class Trigger : TriggerInterface {
     
     /** Animator for the button */
-    [SerializeField] private Animator buttonAnimator;
+    private Animator _buttonAnimator;
     
     /**
      * Method is called before the first frame update.
@@ -17,6 +17,7 @@ public class Trigger : TriggerInterface {
      * cables that surround the button.
      */
     private void Start() {
+        _buttonAnimator = this.GetComponentInChildren<Animator>();
         SoundManager = FindObjectOfType<SoundManager>();
         CableController = GetComponent<CableController>();
     }
@@ -36,8 +37,8 @@ public class Trigger : TriggerInterface {
             // Activating cables
             CableController.UpdateState(isActivated);
             // (Re)setting the triggers of the animation
-            buttonAnimator.ResetTrigger("Up");
-            buttonAnimator.SetTrigger("Down");
+            _buttonAnimator.ResetTrigger("Up");
+            _buttonAnimator.SetTrigger("Down");
 
             // Playing sound of pushed button
             if (SoundManager) {
@@ -61,8 +62,8 @@ public class Trigger : TriggerInterface {
             // Activating cables
             CableController.UpdateState(isActivated);
             // (Re)setting the triggers of the animation
-            buttonAnimator.ResetTrigger("Up");
-            buttonAnimator.SetTrigger("Down");
+            _buttonAnimator.ResetTrigger("Up");
+            _buttonAnimator.SetTrigger("Down");
         }
     }
 
@@ -81,8 +82,8 @@ public class Trigger : TriggerInterface {
             CableController.UpdateState(isActivated);
         }
         // (Re)setting the triggers of the animation
-        buttonAnimator.ResetTrigger("Down");
-        buttonAnimator.SetTrigger("Up");
+        _buttonAnimator.ResetTrigger("Down");
+        _buttonAnimator.SetTrigger("Up");
 
     }
 
