@@ -1,24 +1,35 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// TODO
+///
+/// @author Jonathan Jusup (cgt104707)
+/// </summary>
 public class Connector : MonoBehaviour
 {
+    /** TODO */
     [SerializeField] private Transform fromGameObject;
+    
+    /** TODO */
     [SerializeField] private Transform toGameObject;
     
-    //[SerializeField] private Material activatedMaterial;
-    //[SerializeField] private Material deactivatedMaterial;
-    
+    /** TODO */
     private LineRenderer m_LineRenderer;
     
-    // Start is called before the first frame update
+    /// <summary>
+    /// Method gets called before the first frame update.
+    /// Sets the line renderer component and its positionCount.
+    /// </summary>
     void Start()
     {
         m_LineRenderer = this.GetComponent<LineRenderer>();
         m_LineRenderer.positionCount = 2;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Method gets called once per frame.
+    /// Sets the position of the line renderer at both positions.
+    /// </summary>
     void Update()
     {
         m_LineRenderer.SetPosition(0, fromGameObject.position);

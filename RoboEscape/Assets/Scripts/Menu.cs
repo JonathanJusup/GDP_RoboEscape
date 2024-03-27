@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 using UnityEngine.UI;
 
-/**
- * Class for the functionality of the main menu.
- *
- * @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707)
- */
+
+/// <summary>
+/// Class for the functionality of the main menu.
+///
+/// @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707)
+/// </summary>
 public class Menu : MonoBehaviour
 {
     /** Window for the settings */
@@ -30,10 +30,12 @@ public class Menu : MonoBehaviour
     /** Window for the controls */
     [SerializeField] private GameObject controlsMenu;
     
-    /**
-     * Method is called before the first frame update.
-     * Sets the slider values for the music and SFX and sets the volume of the music.
-     */
+    
+    
+    /// <summary>
+    /// Method is called before the first frame update.
+    /// Sets the slider values for the music and SFX and sets the volume of the music.
+    /// </summary>
     void Start()
     {
         // Destroying instances that serve no purposes for the main menu
@@ -49,45 +51,48 @@ public class Menu : MonoBehaviour
         dropdownResolutions.SetValueWithoutNotify(PlayerPrefs.GetInt("masterResolution", dropdownResolutions.options.Count));
 
     }
-
-    /**
-     * Starts the game from the first level.
-     */
+    
+    /// <summary>
+    /// Starts the game from the first level.
+    /// </summary>
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    /**
-     * Opens the settings menu.
-     */
+    
+    /// <summary>
+    /// Opens the settings menu.
+    /// </summary>
     public void OpenSettings()
     {
         settingsMenu.SetActive(true);
         mainMenu.SetActive(false);
     }
 
-    /**
-     * Closes the settings menu.
-     */
+    
+    /// <summary>
+    /// Closes the settings menu.
+    /// </summary>
     public void CloseSettings()
     {
         settingsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
 
-    /**
-     * Closes the controls window.
-     */
+   
+    /// <summary>
+    /// Closes the controls window.
+    /// </summary>
     public void CloseControls()
     {
         controlsMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
-
-    /**
-     * Opens the controls window.
-     */
+    
+    /// <summary>
+    /// Opens the controls window. 
+    /// </summary>
     public void OpenControls()
     {
         settingsMenu.SetActive(false);
@@ -95,37 +100,38 @@ public class Menu : MonoBehaviour
         
     }
     
-    /**
-     * Loads the sandbox level.
-     */
+    /// <summary>
+    /// Loads the sandbox level. 
+    /// </summary>
     public void LoadSandboxLevel()
     {
         SceneManager.LoadScene("Sandbox");
     }
 
-    /**
-     * Exits the game.
-     */
+    
+    /// <summary>
+    /// Exits the game. 
+    /// </summary>
     public void ExitGame()
     {
         Application.Quit();
     }
 
     
-    /**
-     * Sets the screen to fullscreen or window mode.
-     */
+    /// <summary>
+    /// Sets the screen to fullscreen or window mode. 
+    /// </summary>
+    /// <param name="isFullscreen"> Decides if the window should change to window or fullscreen mode </param>
     public void SetFullscreenMode(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
     }
     
     
-    /**
-     * Sets the selected resolution in the dropdown menu and applies it.
-     *
-     * @param index The index of the dropdown menu.
-     */
+    /// <summary>
+    /// Sets the selected resolution in the dropdown menu and applies it.
+    /// </summary>
+    /// <param name="index"> The index of the dropdown menu. </param>
     public void SetResolution(int index)
     {
         // Getting the dimensions and parsing them
@@ -138,12 +144,13 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetInt("masterResolution", index);
         PlayerPrefs.Save();
     }
-
-    /**
-     * Sets the selected graphics setting in the dropdown menu and applies it.
-     *
-     * @param index The index of the dropdown menu.
-     */
+    
+    
+    
+    /// <summary>
+    /// Sets the selected graphics setting in the dropdown menu and applies it.
+    /// </summary>
+    /// <param name="index"> The index of the dropdown menu. </param>
     public void SetGraphics(int index)
     {
         // Saving index to the player prefs
@@ -154,10 +161,10 @@ public class Menu : MonoBehaviour
         QualitySettings.SetQualityLevel(index);
     }
     
-    /**
-     * Fills the resolution dropdown menu with all to the system of the player
-     * available screen resolutions.
-     */
+    /// <summary>
+    /// Fills the resolution dropdown menu with all to the system of the player
+    /// available screen resolutions.
+    /// </summary>
     private void InitResolutionDropdown()
     {
         // Creating list for resolutions
@@ -175,14 +182,13 @@ public class Menu : MonoBehaviour
             }
         }
         
-        // Adding resolutions to the dropdown menu
+        // Adding resolutions to the dropdown menu and setting current resolution in the dropdown menu
         for (int i = 0; i < filteredResolutions.Count; i++)
         {
             resolutions.Add(filteredResolutions[i].width + "x" + filteredResolutions[i].height);
             if (Screen.currentResolution.width == filteredResolutions[i].width &&
                 Screen.currentResolution.height == filteredResolutions[i].height)
             {
-                Debug.Log("RES INDEX: " + i);
                 dropdownResolutions.SetValueWithoutNotify(i); ;
             }
         }

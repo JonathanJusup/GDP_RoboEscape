@@ -1,26 +1,45 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Class that controls the moving platforms.
+///
+/// @author Jonathan Jusup (cgt104707), TODO SAM AUCH?
+/// </summary>
 public class MovingPlatform : MonoBehaviour {
-    [SerializeField] private Vector3 targetPos;         //Target position
-    [SerializeField] private float speed;               //Platform movement speed
+    //Target position
+    [SerializeField] private Vector3 targetPos;
     
-    private Transform _player;                          //Player to attach on platform transform 
-    private Vector3 _startPos;                          //Starting position
-    private bool _isMovingToTarget = true;              //Flag, if platform is moving to target or back to start
-    private Vector3 _currentPos;                        //Current position
+    //Platform movement speed
+    [SerializeField] private float speed;               
     
-    // Start is called before the first frame update
+    //Player to attach on platform transform 
+    private Transform _player;     
+    
+    //Starting position
+    private Vector3 _startPos;             
+    
+    //Flag, if platform is moving to target or back to start
+    private bool _isMovingToTarget = true;   
+    
+    //Current position
+    private Vector3 _currentPos;                        
+    
+    
+    /// <summary>
+    /// Method gets called before the first frame update.
+    /// Sets the starting position and current position of the platform and the player.
+    /// </summary>
     void Start() {
         this._startPos = this.transform.position;
         this._currentPos = this._startPos;
         this._player = GameObject.Find("Player").transform;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Method gets called once per frame.
+    /// Moves the platform to its target position as long as it has not reached that position.
+    /// Upon reaching its target, it moves back to the starting position.
+    /// </summary>
     void Update()
     {
         if (_isMovingToTarget) {
@@ -41,12 +60,12 @@ public class MovingPlatform : MonoBehaviour {
         transform.position = _currentPos;
     }
 
-    /**
-     * Sticks player to moving platform transform, when player stands on it.
-     * Player still can move freely on the platform.
-     *
-     * @param other player collider
-     */
+    
+    /// <summary>
+    /// Sticks player to moving platform transform, when player stands on it.
+    /// Player still can move freely on the platform.
+    /// </summary>
+    /// <param name="other"> player collider </param>
     private void OnTriggerEnter(Collider other) {
         Debug.Log("Something entered moving platform");
         if (other.CompareTag("Player")) {
@@ -54,12 +73,13 @@ public class MovingPlatform : MonoBehaviour {
         }
     }
 
-    /**
-     * Resets player parent transform, so its no longer based on position
-     * of moving platform
-     *
-     * @param other player collider
-     */
+    
+    
+    /// <summary>
+    /// Resets player parent transform, so its no longer based on position
+    /// of moving platform
+    /// </summary>
+    /// <param name="other"> player collider </param>
     private void OnTriggerExit(Collider other) {
         Debug.Log("Something exit moving platform");
         if (other.CompareTag("Player")) {

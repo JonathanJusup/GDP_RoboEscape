@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Controller for the cables.
+///
+/// @author Jonathan Jusup (cgt104707)
+/// </summary>
 public class CableController : MonoBehaviour {
 
+    /** Container for the cables */
     [SerializeField] private GameObject cableContainer;
+    
+    /** Array for the segments of the cable */
     private MeshRenderer[] cableSegments;
+    
+    /** Activation state of the cables */
     private bool state = false;
     
+    /** Inactive color */
     [SerializeField] private Color colorInactive = Color.black;
+    
+    /** Active color */
     [SerializeField] private Color colorActive = Color.cyan;
     
-    // Start is called before the first frame update
+    /// <summary>
+    /// Method gets called before the first frame update.
+    /// Iterates over the cable segments and assigns their color. 
+    /// </summary>
     void Start() {
         if (!cableContainer) {
             return;

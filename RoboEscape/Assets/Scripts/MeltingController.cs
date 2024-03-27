@@ -1,10 +1,10 @@
 using UnityEngine;
 
-/**
- * Class that controls the melting of a block.
- *
- * @authors Prince Lare-Lantone (cgt104645, Florian Kern (cgt104661), TODO Jonathan auch?
- */
+/// <summary>
+/// Class that controls the melting of a block.
+///
+/// @authors Prince Lare-Lantone (cgt104645), Florian Kern (cgt104661), TODO Jonathan auch?
+/// </summary>
 public class MeltingController : MonoBehaviour
 {
     /** Time frame in which the melting is executed */
@@ -25,24 +25,23 @@ public class MeltingController : MonoBehaviour
     /** Timer for the progress of the melting */
     private float meltingTimer = 0f;
 
-
-
-
-    /**
-     * Method is called before the first frame update.
-     * Sets relevant components such as the material of a cube.
-     */
+    
+    /// <summary>
+    /// Method is called before the first frame update.
+    /// Sets relevant components such as the material of a cube.
+    /// </summary>
     private void Start() {
         this.body = this.transform.GetChild(0);
         initialScale = body.localScale;
         m_Material = body.gameObject.GetComponent<Renderer>().material;
         m_Material.DisableKeyword("_EMISSION");
     }
-
-    /**
-     * Method is called every frame.
-     * Executes the melting of a cube over a set duration.
-     */
+    
+    
+    /// <summary>
+    /// Method is called every frame.
+    /// Executes the melting of a cube over a set duration.
+    /// </summary>
     private void Update()
     {
         if (isMelting)
@@ -67,11 +66,12 @@ public class MeltingController : MonoBehaviour
             }
         }
     }
+  
     
-    /**
-     * Starts the melting process.
-     * Sets a new material to the object.
-     */
+    /// <summary>
+    /// Starts the melting process.
+    /// Sets a new material to the object.
+    /// </summary>
     public void StartMelting()
     {
         

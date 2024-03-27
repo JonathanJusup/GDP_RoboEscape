@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/**
- * Class that controls how the player moves and behaves in certain situations (i.e. dying, jumping)
- *
- * @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707), Prince Lare-Lantone (cgt104645)
- */
+/// <summary>
+/// Class that controls how the player moves and behaves in certain situations (i.e. dying, jumping).
+///
+/// @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707), Prince Lare-Lantone (cgt104645)
+/// </summary>
 public class PlayerController : MonoBehaviour {
     /** The speed of the player */
     public float speed = 5.0f;
@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour {
     /** Ground Check Raycast distance */
     [SerializeField] private float groundCheckDistance = 0.3f;
 
-
+    
+    /// <summary>
+    /// Checks if the player is currently moving or not. Executes moving animation if player is moving.
+    /// </summary>
     public bool IsMoving {
         get { return _isMoving; }
         private set {
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // TODO WEG?
     public bool IsRunning {
         get { return _isRunning; }
         private set {
@@ -67,11 +71,11 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("IsRunning", value);
         }
     }
-
-    /**
-     * Method is called before the first frame update.
-     * Sets relevant components for the player such as the robotPartsSpawner
-     */
+   
+    /// <summary>
+    /// Method is called before the first frame update.
+    /// Initializes important components for later access.
+    /// </summary>
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
@@ -80,11 +84,11 @@ public class PlayerController : MonoBehaviour {
 
         isAlive = true;
     }
-
-    /**
-     * Method is called once per frame.
-     * Checks for certain states in the game and allows the player to move the model.
-     */
+   
+    /// <summary>
+    /// Method is called once per frame.
+    /// Checks whether the game is paused or not, if the player is alive and executes the movement of the player.
+    /// </summary>
     void Update() {
         //Disabling controls when game is paused
         if (PauseMenuController.IsPaused) {
@@ -108,12 +112,11 @@ public class PlayerController : MonoBehaviour {
             rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
         }
     }
-
-
-    /**
-     * Handles the horizontal movement of the player. Rotates the player model in the correct position depending on
-     * in which direction the player moves.
-     */
+    
+    /// <summary>
+    /// Handles the horizontal movement of the player. Rotates the player model in the correct position depending on
+    /// in which direction the player moves.
+    /// </summary>
     void Move() {
         float horizontalMovement = Input.GetAxis("Horizontal");
         IsMoving = Mathf.Abs(horizontalMovement) > 0.1f;
@@ -128,10 +131,10 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         }
     }
-
-    /**
-     * Handles the vertical movement of the player. Executes the jumping animation.
-     */
+  
+    /// <summary>
+    /// Handles the vertical movement of the player. Executes the jumping animation.
+    /// </summary>
     void Jump() {
         if (Input.GetButtonDown("Jump") && isGrounded) {
             animator.SetTrigger("JumpTrigger");
@@ -150,10 +153,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    /**
-     * Handles the event in which the player dies.
-     * Executes the death animation.
-     */
+   
+    /// <summary>
+    /// Handles the event in which the player dies.
+    /// Executes the death animation.
+    /// </summary>
     public void Die() {
         if (!isAlive) {
             return;
@@ -179,15 +183,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Checks if the player is currently on the ground.
+    /// </summary>
     private void CheckIsGround() {
         isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, groundCheckDistance + 0.1f);
         Debug.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.down * (groundCheckDistance + 0.1f), Color.red);
         animator.SetBool("isGrounded", isGrounded);
     }
 
-    /**
-     * Resets the level three seconds after the player dies.
-     */
+  
+    /// <summary>
+    /// Resets the level three seconds after the player dies.
+    /// </summary>
+    /// <returns>TODO</returns>
     private IEnumerator ResetAfterDelay() {
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

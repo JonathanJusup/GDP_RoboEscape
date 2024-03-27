@@ -4,13 +4,13 @@ using UnityEngine.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 
-/**
- * Class for managing all sounds that get used in the game.
- * Allows playing a specific sound or pausing it. Also gives the possibility to change the
- * volume of the sounds.
- *
- * @authors Florian Kern (cgt104661)
- */
+/// <summary>
+/// Class for managing all sounds that get used in the game.
+/// Allows playing a specific sound or pausing it. Also gives the possibility to change the
+/// volume of the sounds.
+///
+/// @authors Florian Kern (cgt104661)
+/// </summary>
 public class SoundManager : MonoBehaviour {
     /** Sound-array for all used sounds */
     public Sound[] sounds;
@@ -39,11 +39,11 @@ public class SoundManager : MonoBehaviour {
     // Public property to access the singleton instance
     public static SoundManager Instance => _instance;
 
-
-    /**
-     * Gets called when the script instance is being loaded.
-     * Initializes all sounds.
-     */
+    
+    /// <summary>
+    /// Gets called when the script instance is being loaded.
+    /// Initializes all sounds.
+    /// </summary>
     void Awake() {
         foreach (Sound sound in sounds) {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -53,12 +53,12 @@ public class SoundManager : MonoBehaviour {
             sound.source.loop = sound.loop;
         }
     }
-
-    /**
-     * Method is called before the first frame update.
-     * Sets the slider values for the music and SFX and sets the volume of the music.
-     * Instantiates the SoundManager as a singleton.
-     */
+    
+    /// <summary>
+    /// Method is called before the first frame update.
+    /// Sets the slider values for the music and SFX and sets the volume of the music.
+    /// Instantiates the SoundManager as a singleton.
+    /// </summary>
     private void Start() {
         audioSliderMusic.SetValueWithoutNotify(PlayerPrefs.GetFloat("masterVolume", 0.3f));
         audioTextMusic.text = (audioSliderMusic.value * 100.0f).ToString("0") + "%";
@@ -78,11 +78,11 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    /**
-     * Plays a sound.
-     *
-     * @param soundName The sound that gets played.
-     */
+    
+    /// <summary>
+    /// Plays a sound.
+    /// </summary>
+    /// <param name="soundName"> The sound that gets played. </param>
     public void PlaySound(string soundName) {
         // Finding the sound
         Sound sound = Array.Find(sounds, sound => sound.name == soundName);
@@ -93,11 +93,11 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    /**
-     * Pauses a currently playing sound.
-     *
-     * @param soundName The sound that gets paused
-     */
+    
+    /// <summary>
+    /// Pauses a currently playing sound.
+    /// </summary>
+    /// <param name="soundName"> The sound that gets paused </param>
     public void PauseSound(string soundName) {
         // Find the wanted sound
         Sound sound = Array.Find(sounds, sound => sound.name == soundName);
@@ -107,12 +107,12 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    /**
-     * Gets called when the slider value for the volume of the music gets changed.
-     * Sets the volume for the music.
-     *
-     * @param volume The volume for the music.
-     */
+    
+    /// <summary>
+    /// Gets called when the slider value for the volume of the music gets changed.
+    /// Sets the volume for the music.
+    /// </summary>
+    /// <param name="volume"> The volume for the music. </param>
     public void SetMusicVolume(float volume) {
         audioTextMusic.text = (volume * 100.0f).ToString("0") + "%";
         // Audiomixer volume changes logarithmically, slider values change linearly
@@ -123,13 +123,12 @@ public class SoundManager : MonoBehaviour {
 
         PlayerPrefs.Save();
     }
-
-    /**
-     * Gets called when the slider value for the volume of the special effects gets changed.
-     * Sets the volume for the special effects.
-     *
-     * @param volume The volume for the special effects.
-     */
+    
+    /// <summary>
+    /// Gets called when the slider value for the volume of the special effects gets changed.
+    /// Sets the volume for the special effects.
+    /// </summary>
+    /// <param name="volume"> The volume for the special effects. </param>
     public void SetSFXVolume(float volume) {
         audioTextSfx.text = (volume * 100.0f).ToString("0") + "%";
         // Audiomixer volume changes logarithmically, slider values change linearly

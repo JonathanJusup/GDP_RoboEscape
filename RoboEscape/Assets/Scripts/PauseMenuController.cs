@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/**
- * Class for the functionality of the pause menu.
- *
- * @author Florian Kern (cgt104661)
- */
+/// <summary>
+/// Class for the functionality of the pause menu.
+///
+/// @author Florian Kern (cgt104661)
+/// </summary>
 public class PauseMenuController : MonoBehaviour
 {
  
@@ -19,28 +19,20 @@ public class PauseMenuController : MonoBehaviour
     public static bool IsPaused;
     
     
-    
+    /** Instance of a PauseMenuController */
     private static PauseMenuController _instance;
 
-    
-    
-    
-    
-    
-    
-    
     // Public property to access the singleton instance
     public static PauseMenuController Instance
     {
         get { return _instance; }
     }
     
-    
-    /**
-     * Method is called before the first frame update.
-     * Deactivates the windows for the pause menu and the controls and
-     * sets the object to not be destroyed on load so it can be called from following scenes.
-     */
+    /// <summary>
+    /// Method is called before the first frame update.
+    /// Deactivates the windows for the pause menu and the controls and
+    /// sets the object to not be destroyed on load so it can be called from following scenes.
+    /// </summary>
     void Start()
     {
         pauseMenu.SetActive(false);
@@ -61,10 +53,11 @@ public class PauseMenuController : MonoBehaviour
 
     }
 
-    /**
-     * Method is called once per frame.
-     * Checks if the escape key has been pressed to pause or resume the game.
-     */
+
+    /// <summary>
+    /// Method is called once per frame.
+    /// Checks if the escape key has been pressed to pause or resume the game.
+    /// </summary>
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -81,9 +74,10 @@ public class PauseMenuController : MonoBehaviour
     }
     
     
-    /**
-     * Opens the pause menu and freezes the scene.
-     */
+
+    /// <summary>
+    /// Opens the pause menu and freezes the scene.
+    /// </summary>
     private void PauseGame()
     {
         // Opening pause menu
@@ -93,10 +87,11 @@ public class PauseMenuController : MonoBehaviour
         IsPaused = true;
     }
     
-    /**
-     * Resumes the game.
-     * Deactivates the pause menu and sets the timescale back to 1.
-     */
+    
+    /// <summary>
+    /// Resumes the game.
+    /// Deactivates the pause menu and sets the timescale back to 1.
+    /// </summary>
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
@@ -104,28 +99,30 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1.0f;
         IsPaused = false;
     }
-
-    /**
-     * Closes the controls window.
-     */
+  
+    /// <summary>
+    /// Closes the controls window.
+    /// </summary>
     public void CloseControls()
     {
         pauseMenu.SetActive(true);
         controls.SetActive(false);
     }
+  
     
-    /**
-     * Opens the controls window.
-     */
+    /// <summary>
+    /// Opens the controls window.
+    /// </summary>
     public void OpenControls()
     {
         pauseMenu.SetActive(false);
         controls.SetActive(true);
     }
     
-    /**
-     * Restarts the level from the pause menu.
-     */
+    
+    /// <summary>
+    /// Restarts the level from the pause menu. 
+    /// </summary>
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -134,10 +131,11 @@ public class PauseMenuController : MonoBehaviour
         pauseMenu.SetActive(false);
         controls.SetActive(false);
     }
-
-    /**
-     * Loads the menu scene.
-     */
+    
+    
+    /// <summary>
+    /// Loads the menu scene.
+    /// </summary>
     public void BackToMenu()
     {
         IsPaused = false;
@@ -146,17 +144,15 @@ public class PauseMenuController : MonoBehaviour
 
         
     }
-
-
-    /**
-     * Quits the game.
-     */
+    
+    
+    /// <summary>
+    /// Quits the game. 
+    /// </summary>
     public void QuitGame()
     {
         
         Application.Quit();
     }
-    
-    
-    
+
 }
