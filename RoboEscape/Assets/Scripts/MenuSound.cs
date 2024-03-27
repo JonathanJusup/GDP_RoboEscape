@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-/**
- * Class for controlling the sound of the game.
- *
- * @author Florian Kern (cgt104661)
- */
+/// <summary>
+/// Class for controlling the sound of the menu.
+///
+/// @author Florian Kern (cgt104661)
+/// </summary>
 public class MenuSound : MonoBehaviour
 {
     /** Audiomixer for the music */
@@ -30,11 +30,11 @@ public class MenuSound : MonoBehaviour
     
     
     
-    
-    /**
-     * Method is called before the first frame update.
-     * Sets the slider values for the music and SFX and sets the volume of the music.
-     */
+    /// <summary>
+    /// Method is called before the first frame update.
+    ///
+    /// Sets the slider values for the music and SFX and sets the volume of the music.
+    /// </summary>
     void Start()
     {
         // using the values of the PlayerPrefs to set the value for the slider of the music or setting default value
@@ -47,13 +47,13 @@ public class MenuSound : MonoBehaviour
         audioMixerMusic.SetFloat("volume", Mathf.Log10(PlayerPrefs.GetFloat("masterVolume", 0.3f)) * 20);
 
     }
-
-    /**
-     * Gets called when the slider value for the volume of the music gets changed.
-     * Sets the volume for the music.
-     *
-     * @param volume The volume for the music.
-     */
+    
+    
+    /// <summary>
+    /// Gets called when the slider value for the volume of the music gets changed.
+    /// Sets the volume for the music.
+    /// </summary>
+    /// <param name="volume"> The volume for the music. </param>
     public void SetMusicVolume(float volume)
     {
         audioTextMusic.text = (volume * 100.0f).ToString("0") + "%";
@@ -68,12 +68,13 @@ public class MenuSound : MonoBehaviour
         PlayerPrefs.Save();
     }
     
-    /**
-     * Gets called when the slider value for the volume of the special effects gets changed.
-     * Sets the volume for the special effects.
-     *
-     * @param volume The volume for the special effects.
-     */
+    
+    
+    /// <summary>
+    /// Gets called when the slider value for the volume of the special effects gets changed.
+    /// Sets the volume for the special effects.
+    /// </summary>
+    /// <param name="volume"> The volume for the special effects. </param>
     public void SetSFXVolume(float volume)
     {
         audioTextSFX.text = (volume * 100.0f).ToString("0") + "%";

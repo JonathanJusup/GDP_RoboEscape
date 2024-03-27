@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/**
- * Class for switching between levels.
- *
- * @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707)
- */
+/// <summary>
+/// Class for switching between levels.
+///
+/// @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707)
+/// </summary>
 public class SwitchLevel : MonoBehaviour {
-    /**
-     * Update function is called once per frame.
-     * Checks if a key to switch a level has been pressed or if the level wants to be restarted.
-     */
+    
+    /// <summary>
+    /// Update function is called once per frame.
+    /// Checks if a key to switch a level has been pressed or if the level wants to be restarted.
+    /// </summary>
     void Update() {
         if (!PauseMenuController.IsPaused) {
             //Check if the '1' key is pressed

@@ -1,11 +1,12 @@
 using UnityEngine.Audio;
 using UnityEngine;
 
-/**
- * Class for a single sound that can be used in a game.
- *
- * @author Florian Kern (cgt104661)
- */
+
+/// <summary>
+/// Class for a single sound that can be used in a game.
+///
+/// @author Florian Kern (cgt104661)
+/// </summary>
 [System.Serializable]
 public class Sound
 {

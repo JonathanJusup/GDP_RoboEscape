@@ -1,32 +1,66 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
+/// <summary>
+/// Controller for the mirrors that reflect the lasers.
+///
+/// @author Jonathan Jusup (cgt104707)
+/// </summary>
 public class MirrorController : MonoBehaviour {
+    
+    /** Trigger that rotates the mirror to the left */
     [SerializeField] private Trigger leftTrigger;
+    
+    /** Trigger that rotates the mirror to the right */
     [SerializeField] private Trigger rightTrigger;
 
+    /** Transform of the mirror base TODO stimmt das? */
     [SerializeField] private Transform translationCenter;
+    
+    /** Transform of the mirror TODO stimmt das? */
     [SerializeField] private Transform body;
 
-    [SerializeField] private float rotationSpeed;           //Rotation Speed
-    [SerializeField] private float rotationLower;           //Lower Rotation bound
-    [SerializeField] private float rotationUpper;           //Upper rotation bound
+    /** Rotation Speed */
+    [SerializeField] private float rotationSpeed;   
     
-    [SerializeField] private bool shiftHorizontally = true;     //Flag, if Mirror moves horizontally or vertically
-    [SerializeField] private float shiftLower = -0.5f;    //Lower movement bound
-    [SerializeField] private float shiftUpper = 0.5f;     //Upper movement bound
-
+    /** Lower Rotation bound */
+    [SerializeField] private float rotationLower;  
     
+    /** Upper rotation bound */
+    [SerializeField] private float rotationUpper;           
+    
+    /** Flag if Mirror moves horizontally or vertically */
+    [SerializeField] private bool shiftHorizontally = true;
+    
+    /** Lower movement bound */
+    [SerializeField] private float shiftLower = -0.5f;    
+    
+    /** Upper movement bound */
+    [SerializeField] private float shiftUpper = 0.5f;     
+    
+    /** Initial rotation of the mirror */
     private Quaternion _initRotation;
+    
+    /** Current rotation */
     private float _currentRotation = 0.0f;
+    
+    /** TODO */
     private float _offsetLower;
+    
+    /** TODO */
     private float _offsetUpper;
     
+    /** Animator of the mirror */
     private Animator _animator;
+    
+    /** Particle system */
     private ParticleSystem _particleSystem;
 
 
 
+    /// <summary>
+    /// Method gets called before the first frame update.
+    /// Sets the animator, the particle system and shifts the mirror into the right position.
+    /// </summary>
     private void Start() {
         _animator = this.GetComponentInChildren<Animator>();
         _particleSystem = this.GetComponentInChildren<ParticleSystem>();
@@ -40,7 +74,10 @@ public class MirrorController : MonoBehaviour {
         shiftUpper += shiftHorizontally ? initPosition.x : initPosition.y;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Method gets called once per frame.
+    /// Rotates the mirror and shifts it in the right direction.
+    /// </summary>
     void Update() {
         if (!leftTrigger && !rightTrigger) {
             return;
@@ -71,6 +108,10 @@ public class MirrorController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Calculates the rotation of the mirror depending on the pressed trigger.
+    /// Activates the particle system if both assigned triggers are pressed simultaneously 
+    /// </summary>
     private void CalcMirrorRotation() {
         float rotationFactor = 0.0f;
 
