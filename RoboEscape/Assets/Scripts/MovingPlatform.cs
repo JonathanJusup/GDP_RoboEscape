@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Class that controls the moving platforms.
 ///
-/// @author Jonathan Jusup (cgt104707), TODO SAM AUCH?
+/// @author Jonathan Jusup (cgt104707)
 /// </summary>
 public class MovingPlatform : MonoBehaviour {
     //Target position

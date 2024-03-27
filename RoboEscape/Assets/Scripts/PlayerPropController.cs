@@ -6,11 +6,10 @@ using UnityEngine;
 ///
 /// @author Jonathan Jusup (cgt104707)
 /// </summary>
-public class PlayerPropController : MonoBehaviour
-{
+public class PlayerPropController : MonoBehaviour {
     /** Collider of the player prop */
     private CapsuleCollider _collider;
-    
+
     /** Robot parts spawner that spawns robot parts upon destruction of the player prop */
     private RobotPartsSpawner _robotPartsSpawner;
 
@@ -18,8 +17,7 @@ public class PlayerPropController : MonoBehaviour
     /// Method is called before the first frame update.
     /// Initializes the collider of the player prop and the robot parts spawner.
     /// </summary>
-    private void Start()
-    {
+    private void Start() {
         _collider = this.GetComponent<CapsuleCollider>();
         _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
     }
@@ -27,11 +25,9 @@ public class PlayerPropController : MonoBehaviour
     /// <summary>
     /// Destroys the player prop after a set delay using a coroutine.
     /// </summary>
-    public void DieAfterDelay()
-    {
+    public void DieAfterDelay() {
         _collider = null;
-        if (!_collider)
-        {
+        if (!_collider) {
             StartCoroutine(DieAfterDelayCoroutine());
         }
     }
@@ -40,17 +36,15 @@ public class PlayerPropController : MonoBehaviour
     /// Destroys the player prop after a short delay.
     /// </summary>
     /// <returns> TODO </returns>
-    private IEnumerator DieAfterDelayCoroutine()
-    {
+    private IEnumerator DieAfterDelayCoroutine() {
         yield return new WaitForSeconds(0.5f);
         Die();
     }
-    
+
     /// <summary>
     /// Destroys the player prop and spawns robot parts upon destruction.
     /// </summary>
-    private void Die()
-    {
+    private void Die() {
         this.gameObject.SetActive(false);
         _robotPartsSpawner.SpawnParts(this.transform.position);
     }

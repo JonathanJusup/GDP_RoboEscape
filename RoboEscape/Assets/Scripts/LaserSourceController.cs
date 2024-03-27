@@ -11,7 +11,7 @@ public class LaserSourceController : MonoBehaviour {
     public Material material;
 
     /** Reference to the trigger interface */
-    [SerializeField] private TriggerInterface trigger;
+    [SerializeField] private Trigger trigger;
     
     /** Bool if the laser will be deadly or not */
     [SerializeField] private bool isDeadly = false;

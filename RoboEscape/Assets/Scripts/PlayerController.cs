@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour {
     /** Spawner for individual parts of the robot model */
     private RobotPartsSpawner _robotPartsSpawner;
 
+    /** Capsule Collider of player */
+    private CapsuleCollider _collider;
+
     /** Value that decides how fast the player is falling to the ground */
     public float fallMultiplier = 2.5f;
 
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     /** Ground Check Raycast distance */
     [SerializeField] private float groundCheckDistance = 0.3f;
 
-    
+
     /// <summary>
     /// Checks if the player is currently moving or not. Executes moving animation if player is moving.
     /// </summary>
@@ -71,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             animator.SetBool("IsRunning", value);
         }
     }
-   
+
     /// <summary>
     /// Method is called before the first frame update.
     /// Initializes important components for later access.
@@ -81,10 +84,11 @@ public class PlayerController : MonoBehaviour {
         animator = this.GetComponent<Animator>();
         _soundManager = FindObjectOfType<SoundManager>();
         _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
+        _collider = this.GetComponent<CapsuleCollider>();
 
         isAlive = true;
     }
-   
+
     /// <summary>
     /// Method is called once per frame.
     /// Checks whether the game is paused or not, if the player is alive and executes the movement of the player.
@@ -112,7 +116,7 @@ public class PlayerController : MonoBehaviour {
             rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
         }
     }
-    
+
     /// <summary>
     /// Handles the horizontal movement of the player. Rotates the player model in the correct position depending on
     /// in which direction the player moves.
@@ -131,7 +135,7 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         }
     }
-  
+
     /// <summary>
     /// Handles the vertical movement of the player. Executes the jumping animation.
     /// </summary>
@@ -153,7 +157,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-   
+
     /// <summary>
     /// Handles the event in which the player dies.
     /// Executes the death animation.
@@ -181,6 +185,8 @@ public class PlayerController : MonoBehaviour {
         foreach (Transform child in this.transform) {
             child.gameObject.SetActive(false);
         }
+
+        _collider.enabled = false;
     }
 
     /// <summary>
@@ -188,11 +194,12 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     private void CheckIsGround() {
         isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, groundCheckDistance + 0.1f);
-        Debug.DrawLine(transform.position + Vector3.up * 0.1f, transform.position + Vector3.down * (groundCheckDistance + 0.1f), Color.red);
+        Debug.DrawLine(transform.position + Vector3.up * 0.1f,
+            transform.position + Vector3.down * (groundCheckDistance + 0.1f), Color.red);
         animator.SetBool("isGrounded", isGrounded);
     }
 
-  
+
     /// <summary>
     /// Resets the level three seconds after the player dies.
     /// </summary>

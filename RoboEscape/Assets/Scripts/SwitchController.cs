@@ -4,31 +4,30 @@ using UnityEngine;
 /// <summary>
 /// Controller for the switch that controls the doors.
 ///
-/// @author Jonathan Jusup (cgt104707), Florian Kern (cgt104661)
+/// @author Jonathan El Jusup (cgt104707), Florian Kern (cgt104661)
 /// </summary>
-public class SwitchController : TriggerInterface {
-    
-    /** TODO */
+public class SwitchController : Trigger {
+    /** Initial set timer */
     [SerializeField] private float initTimer = 1.0f;
-    
-    /** TODO */
+
+    /** Current elapsed time, after timer reset */
     private float _currentTimer;
-    
-    /** Reference to the door that is controlled by the switch */
+
+    /** Door reference that is controlled by the switch */
     [SerializeField] private Door door;
 
-    /** Flag that decides if the switch receives a green (non-lethal) or red (lethal) laser */
+    /** Flag, if the switch receives a green (safe) or red (deadly) laser */
     public bool receiveDeadlyLaser;
-    
-    /** Material of the body */
+
+    /** Actual material of the body */
     [SerializeField] private Material bodyMaterial;
-    
+
     /** Green material for the switch */
     [SerializeField] private Material greenMaterial;
-    
+
     /** Red material for the switch */
     [SerializeField] private Material redMaterial;
-    
+
     /** Point light of the switch */
     [SerializeField] private Light pointLight;
 
@@ -67,7 +66,6 @@ public class SwitchController : TriggerInterface {
             initialDoorState = door.GetIsOpen();
         }
 
-
         if (isActivated) {
             _currentTimer -= Time.deltaTime;
             if (_currentTimer <= 0.0f) {
@@ -90,7 +88,7 @@ public class SwitchController : TriggerInterface {
     }
 
     /// <summary>
-    /// Enables or disables the pointlight inside of the switch.
+    /// Enables or disables the pointLight inside of the switch.
     /// </summary>
     private void UpdatePointLightState() {
         if (isActivated) {
@@ -105,9 +103,9 @@ public class SwitchController : TriggerInterface {
     }
 
     /// <summary>
-    /// Opens or closes the door.
+    /// Opens or closes the door, if door is referenced.
     /// </summary>
-    /// <param name="open"> Flag that decides if the door opens or closes. </param>
+    /// <param name="open"> Flag, if the door opens or closes</param>
     private void UpdateDoorState(bool open) {
         if (door) {
             if (open) {
@@ -119,7 +117,7 @@ public class SwitchController : TriggerInterface {
     }
 
     /// <summary>
-    /// Activates the switch.
+    /// Activates the switch and resets timer to initial value
     /// </summary>
     public void ActivateSwitch() {
         isActivated = true;

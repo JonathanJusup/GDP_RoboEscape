@@ -15,10 +15,10 @@ public class SoundManager : MonoBehaviour {
     /** Sound-array for all used sounds */
     public Sound[] sounds;
 
-    /** Audiomixer for the music */
+    /** AudioMixer for the music */
     [SerializeField] private AudioMixer audioMixerMusic;
 
-    /** Audiomixer for the SFX */
+    /** AudioMixer for the SFX */
     [SerializeField] private AudioMixer audioMixerSfx;
 
     /** Slider for the music */
@@ -37,9 +37,9 @@ public class SoundManager : MonoBehaviour {
 
 
     // Public property to access the singleton instance
-    public static SoundManager Instance => _instance;
+    public static SoundManager getInstance => _instance;
 
-    
+
     /// <summary>
     /// Gets called when the script instance is being loaded.
     /// Initializes all sounds.
@@ -53,7 +53,7 @@ public class SoundManager : MonoBehaviour {
             sound.source.loop = sound.loop;
         }
     }
-    
+
     /// <summary>
     /// Method is called before the first frame update.
     /// Sets the slider values for the music and SFX and sets the volume of the music.
@@ -78,7 +78,7 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    
+
     /// <summary>
     /// Plays a sound.
     /// </summary>
@@ -93,7 +93,7 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    
+
     /// <summary>
     /// Pauses a currently playing sound.
     /// </summary>
@@ -107,7 +107,7 @@ public class SoundManager : MonoBehaviour {
         }
     }
 
-    
+
     /// <summary>
     /// Gets called when the slider value for the volume of the music gets changed.
     /// Sets the volume for the music.
@@ -123,7 +123,7 @@ public class SoundManager : MonoBehaviour {
 
         PlayerPrefs.Save();
     }
-    
+
     /// <summary>
     /// Gets called when the slider value for the volume of the special effects gets changed.
     /// Sets the volume for the special effects.

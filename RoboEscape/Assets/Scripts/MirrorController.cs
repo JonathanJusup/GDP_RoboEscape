@@ -8,10 +8,10 @@ using UnityEngine;
 public class MirrorController : MonoBehaviour {
     
     /** Trigger that rotates the mirror to the left */
-    [SerializeField] private Trigger leftTrigger;
+    [SerializeField] private PressurePlate leftTrigger;
     
     /** Trigger that rotates the mirror to the right */
-    [SerializeField] private Trigger rightTrigger;
+    [SerializeField] private PressurePlate rightTrigger;
 
     /** Transform of the mirror base TODO stimmt das? */
     [SerializeField] private Transform translationCenter;
