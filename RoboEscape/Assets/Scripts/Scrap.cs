@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Class for the falling scrap decoration in levels. If scrap falls under a
 /// minimum threshold, resets it to its initial position for the cycle to
-/// repeat indefinitely
+/// repeat indefinitely.
 ///
 /// @author Jonathan El Jusup (cgt104707)
 /// </summary>

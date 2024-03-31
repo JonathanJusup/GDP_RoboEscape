@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Class that controls how the player moves and behaves in certain situations (i.e. dying, jumping).
 ///
-/// @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707), Prince Lare-Lantone (cgt104645)
+/// @authors Florian Kern (cgt104661), Jonathan El Jusup (cgt104707), Prince Lare-Lantone (cgt104645)
 /// </summary>
 public class PlayerController : MonoBehaviour {
     /** The speed of the player */
@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour {
     public bool isAlive = true;
 
     /** The horizontal movement of the player */
-    private float horizontalMovement;
+    private float _horizontalMovement;
 
-    /** The Rigidbody component of the player */
-    private Rigidbody rb;
+    /** The RigidBody component of the player */
+    private Rigidbody _rb;
 
     /** animator of the player */
-    Animator animator;
+    Animator _animator;
 
     /** The soundmanager for SFX (i.e. jumping) */
     private SoundManager _soundManager;
@@ -48,9 +48,6 @@ public class PlayerController : MonoBehaviour {
     /** Flag for deciding if a player is moving or not */
     private bool _isMoving = false;
 
-    /** Flag for deciding if a player is running or not */
-    private bool _isRunning = false;
-
     /** Ground Check Raycast distance */
     [SerializeField] private float groundCheckDistance = 0.3f;
 
@@ -62,16 +59,7 @@ public class PlayerController : MonoBehaviour {
         get { return _isMoving; }
         private set {
             _isMoving = value;
-            animator.SetBool("IsMoving", value);
-        }
-    }
-
-    // TODO WEG?
-    public bool IsRunning {
-        get { return _isRunning; }
-        private set {
-            _isRunning = value;
-            animator.SetBool("IsRunning", value);
+            _animator.SetBool("IsMoving", value);
         }
     }
 
@@ -80,8 +68,8 @@ public class PlayerController : MonoBehaviour {
     /// Initializes important components for later access.
     /// </summary>
     void Start() {
-        rb = this.GetComponent<Rigidbody>();
-        animator = this.GetComponent<Animator>();
+        _rb = this.GetComponent<Rigidbody>();
+        _animator = this.GetComponent<Animator>();
         _soundManager = FindObjectOfType<SoundManager>();
         _robotPartsSpawner = this.GetComponent<RobotPartsSpawner>();
         _collider = this.GetComponent<CapsuleCollider>();
@@ -101,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 
         //Setting the velocity to zero if player is dead and disabling controls
         if (!this.isAlive) {
-            rb.velocity = Vector3.zero;
+            _rb.velocity = Vector3.zero;
             return;
         }
 
@@ -110,10 +98,10 @@ public class PlayerController : MonoBehaviour {
         CheckIsGround();
 
         //Increase Gravity when falling, keep it lower, when high jumping
-        if (rb.velocity.y < 0) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
-        } else if (rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
-            rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
+        if (_rb.velocity.y < 0) {
+            _rb.velocity += Vector3.up * (Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime);
+        } else if (_rb.velocity.y > 0.0f && !Input.GetButton("Jump")) {
+            _rb.velocity += Vector3.up * (Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime);
         }
     }
 
@@ -126,7 +114,7 @@ public class PlayerController : MonoBehaviour {
         IsMoving = Mathf.Abs(horizontalMovement) > 0.1f;
 
         Vector3 movement = new Vector3(horizontalMovement, 0.0f, 0.0f);
-        rb.velocity = new Vector3(movement.x * speed, rb.velocity.y, 0.0f);
+        _rb.velocity = new Vector3(movement.x * speed, _rb.velocity.y, 0.0f);
 
         //Rotate player according to movement direction
         if (horizontalMovement < 0) {
@@ -141,18 +129,18 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     void Jump() {
         if (Input.GetButtonDown("Jump") && isGrounded) {
-            animator.SetTrigger("JumpTrigger");
+            _animator.SetTrigger("JumpTrigger");
             if (_soundManager) {
                 _soundManager.PlaySound("Jump");
             }
 
             //Reset y-velocity before jumping
-            Vector3 velocity = rb.velocity;
+            Vector3 velocity = _rb.velocity;
             velocity = new Vector3(velocity.x, 0.0f, velocity.z);
-            rb.velocity = velocity;
+            _rb.velocity = velocity;
 
             //Execute jump
-            rb.velocity = Vector3.up * jumpPower;
+            _rb.velocity = Vector3.up * jumpPower;
             //isGrounded = false;
         }
     }
@@ -168,7 +156,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         isAlive = false;
-        animator.SetTrigger("DeathTrigger");
+        _animator.SetTrigger("DeathTrigger");
 
         Vector3 playerPos = transform.position;
         // Spawing individual parts of the robot
@@ -194,16 +182,13 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     private void CheckIsGround() {
         isGrounded = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, groundCheckDistance + 0.1f);
-        Debug.DrawLine(transform.position + Vector3.up * 0.1f,
-            transform.position + Vector3.down * (groundCheckDistance + 0.1f), Color.red);
-        animator.SetBool("isGrounded", isGrounded);
+        _animator.SetBool("isGrounded", isGrounded);
     }
 
 
     /// <summary>
     /// Resets the level three seconds after the player dies.
     /// </summary>
-    /// <returns>TODO</returns>
     private IEnumerator ResetAfterDelay() {
         yield return new WaitForSeconds(3.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

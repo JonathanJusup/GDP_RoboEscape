@@ -10,15 +10,13 @@ using UnityEngine.SceneManagement;
 /// @author Florian Kern (cgt104661)
 /// </summary>
 public class ExitLevel : MonoBehaviour {
-    
     /** Transition animation */
     [SerializeField] private Animator transitionAnim;
 
     /** Duration of the transition */
     [SerializeField] private float transitionTime = 1f;
-    
-    
-    
+
+
     /// <summary>
     /// Gets called when an object enters the area behind a door that leads to the next level.
     /// </summary>
@@ -28,10 +26,8 @@ public class ExitLevel : MonoBehaviour {
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }
     }
-    
-    
-    
-    
+
+
     /// <summary>
     /// Loads a level after an animation and a fixed time.
     /// </summary>

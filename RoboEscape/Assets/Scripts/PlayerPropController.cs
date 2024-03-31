@@ -2,9 +2,11 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Controller for the player props inside of the second level.
+/// Controller for the player props inside of the second level. PlayerProps
+/// cannot move, but can be destroyed like the player. Upon destruction, spawns
+/// robot parts on their position.
 ///
-/// @author Jonathan Jusup (cgt104707)
+/// @author Jonathan El Jusup (cgt104707)
 /// </summary>
 public class PlayerPropController : MonoBehaviour {
     /** Collider of the player prop */
@@ -35,7 +37,6 @@ public class PlayerPropController : MonoBehaviour {
     /// <summary>
     /// Destroys the player prop after a short delay.
     /// </summary>
-    /// <returns> TODO </returns>
     private IEnumerator DieAfterDelayCoroutine() {
         yield return new WaitForSeconds(0.5f);
         Die();

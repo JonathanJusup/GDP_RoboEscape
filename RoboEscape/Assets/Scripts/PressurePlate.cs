@@ -1,15 +1,15 @@
 using UnityEngine;
 
 /**
- * Class for the button inside the game. Controls the events that occur, when a button has
- * been pressed.
+ * Class for the button inside the game. Gets members from Trigger super class.
+ * Controls effectors by changing their states. A button can be pressed by the
+ * player or by moving an object like a crate on top of it. Can be combined with
+ * cables, which connect triggers and effectors.
  *
  * @authors Jonathan El Jusup (cgt104707), Florian Kern (cgt104661)
  */
 public class PressurePlate : Trigger {
-    /// <summary>
-    /// Button animator
-    /// </summary>
+    /** Button animator */
     private Animator _buttonAnimator;
 
 

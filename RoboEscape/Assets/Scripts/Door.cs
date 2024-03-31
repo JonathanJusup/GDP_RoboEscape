@@ -2,55 +2,48 @@ using UnityEngine;
 
 
 /// <summary>
-/// Class that controls an animation for opening and closing the door
-/// that leads to the next level.
+/// Class that controls a simple door and its animation for opening
+/// and closing it.
 ///
-/// @authors Florian Kern (cgt104661), Jonathan Jusup (cgt104707)
+/// @authors Florian Kern (cgt104661), Jonathan El Jusup (cgt104707)
 /// </summary>
-public class Door : MonoBehaviour
-{
+public class Door : MonoBehaviour {
     /** Animator for the door animations */
     [SerializeField] private Animator animator;
-    
-    /** Flag that indicates if the door is open or not */
-    private bool isOpen = false;
 
-    
+    /** Flag that indicates if the door is open or not */
+    private bool _isOpen = false;
+
+
     /// <summary>
-    /// Triggers the animation that opens the door.
+    /// Triggers opening animation of the opens and update its state.
     /// </summary>
-    public void Open()
-    {
-        if (!isOpen)
-        {
+    public void Open() {
+        if (!_isOpen) {
             // Setting trigger for door animation
             animator.SetTrigger("OpenDoor");
-            isOpen = true;
+            _isOpen = true;
         }
     }
 
-   
+
     /// <summary>
-    /// Triggers the animation that closes the door.
+    /// Triggers closing animation of the door and updates its state.
     /// </summary>
-    public void Close()
-    {
-        if (isOpen)
-        {
+    public void Close() {
+        if (_isOpen) {
             // Setting trigger for door animation
             animator.SetTrigger("CloseDoor");
-            isOpen = false;    
+            _isOpen = false;
         }
     }
 
-  
+
     /// <summary>
-    /// Getter for flag if door is open or not.
+    /// Getter for current state
     /// </summary>
-    /// <returns> Value of isOpen </returns>
-    public bool GetIsOpen()
-    {
-        return isOpen;
+    /// <returns>Current state of door</returns>
+    public bool GetIsOpen() {
+        return _isOpen;
     }
-    
 }

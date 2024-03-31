@@ -63,7 +63,6 @@ public class MenuSound : MonoBehaviour
         
         // Setting the playerprefs with the chosen volume
         PlayerPrefs.SetFloat("masterVolume", volume);
-        Debug.Log("CHANGING VOL MUSIC");
         // Saving playerprefs
         PlayerPrefs.Save();
     }
@@ -84,7 +83,6 @@ public class MenuSound : MonoBehaviour
         
         // Setting the player prefs for the special effects with the chosen volume
         PlayerPrefs.SetFloat("masterSFX", volume);
-        Debug.Log("CHANGING VOL SFX");
         // Saving playerprefs
         PlayerPrefs.Save();
     }

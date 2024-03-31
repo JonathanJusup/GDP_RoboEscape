@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Class for the robot parts and scraps that get spawned when the player died due to a laser.
+/// Class for the robot parts and scraps that get spawned when
+/// the player or a robot prop dies.
 ///
-/// @author Jonathan Jusup (cgt104707)
+/// @author Jonathan El Jusup (cgt104707)
 /// </summary>
 public class RobotPartsSpawner : MonoBehaviour {
     /** Number of spawning parts */
@@ -25,7 +26,7 @@ public class RobotPartsSpawner : MonoBehaviour {
     /// Iterates through both lists, spawns the objects inside them and apply a force to their rigidbodies
     /// that sends them flying through the scene in a random direction.
     /// </summary>
-    /// <param name="pos"> Position of the player </param>
+    /// <param name="pos">Position of the player</param>
     public void SpawnParts(Vector3 pos) {
         // Iterating through scrap list
         for (int i = 0; i < numberOfScraps; i++) {

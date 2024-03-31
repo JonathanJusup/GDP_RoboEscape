@@ -16,7 +16,6 @@ public class PauseMenuController : MonoBehaviour {
     /** Flag that indicates if the game is currently paused or not */
     public static bool IsPaused;
 
-
     /** Instance of a PauseMenuController */
     private static PauseMenuController _instance;
 
