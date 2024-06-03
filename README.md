@@ -11,4 +11,4 @@ zunehmend schwerer werden, um den Spieler herauszufordern. Es folgt eine Beschre
 Levels, wie es aufgebaut wird, wie diese zu lösen sind und was für Gedanken wir uns beim Design dazu
 gemacht haben.
 
-(Für weitere Informationen siehe Bericht.pfd)
+(Für weitere Informationen siehe Bericht.pdf)
