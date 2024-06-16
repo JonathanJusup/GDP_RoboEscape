@@ -1,4 +1,6 @@
 # README
+![](Showcase_Image.png)
+
 ## Projektbeschreibung
 Robo Escape ist ein 2,5-dimensionaler Puzzle-Platformer, in dem der Spieler in die Fußstapfen eines
 kleinen Roboters tritt, um aus einer unbekannten Einrichtung zu fliehen, in welcher seinesgleichen
